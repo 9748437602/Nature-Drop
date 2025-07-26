@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Nature Drop - Your Smart Shop</title>
+  <title>ShopifyX - Your Smart Shop</title>
   <meta name="description" content="ShopifyX - Best online store for your needs" />
 
   <!-- Google Fonts -->
@@ -53,13 +53,7 @@
       position: relative;
     }
 
-    .search-box input {
-      padding: 6px 12px 6px 35px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
-      width: 100%;
-      max-width: 300px;
+    $1max-width: 100%;
     }
 
     .search-box i {
@@ -196,19 +190,18 @@
     <!-- 🔹 Logo Section -->
     <div class="logo">
       <i class="fas fa-store"></i>
-      <span>Nature Drop</span>
+      <span>ShopifyX</span>
     </div>
 
     <!-- 🔹 Search Bar (centered) -->
     <div class="search-box" style="
-  max-width: 460px;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-  display: flex;
-  align-items: center;
-">
-  <div style="position: relative; width: 100%;">
+    flex: 1;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+  ">
     <input type="text" placeholder="Search products..." style="
       padding: 12px 48px 12px 20px;
       border: 2px solid #f06292;
@@ -218,10 +211,10 @@
     " onkeydown="if(event.key==='Enter')searchProduct();" />
     <button onclick="searchProduct()" style="
       position: absolute;
-      right: 170px;
+      right: 10px;
       top: 50%;
       transform: translateY(-50%);
-      background-color: red;
+      background-color: #f06292;
       border: none;
       border-radius: 50%;
       width: 32px;
@@ -231,10 +224,9 @@
       justify-content: center;
       cursor: pointer;
     ">
-      <i class="fas fa-search" style="color: white; font-size: 15px;"></i>
+      <i class="fas fa-search" style="color: white; font-size: 14px;"></i>
     </button>
   </div>
-</div>
 
     <!-- 🔹 Hamburger Menu -->
     <div class="header-right">
