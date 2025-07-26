@@ -472,6 +472,144 @@
 </html>
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products - ShopifyX</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #000;
+    }
+
+    /* Product Section */
+    .products {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .products h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: #f7f7f7;
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product-title {
+      font-size: 1.1rem;
+      margin: 10px 0 5px;
+    }
+
+    .product-price {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .product-card button {
+      padding: 10px 18px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .product-card button:hover {
+      transform: scale(1.1);
+      background-color: #333;
+    }
+
+    @media (max-width: 600px) {
+      .products h2 {
+        font-size: 1.5rem;
+      }
+
+      .product-card button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Products Section -->
+  <section class="products">
+    <h2>Our Products</h2>
+    <div class="product-grid">
+      
+      <!-- Product 1 -->
+      <div class="product-card">
+        <img src="https://via.placeholder.com/300x180.png?text=Product+1" alt="Product 1">
+        <div class="product-title">Product 1</div>
+        <div class="product-price">₹499</div>
+        <button>Buy Now</button>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <img src="https://via.placeholder.com/300x180.png?text=Product+2" alt="Product 2">
+        <div class="product-title">Product 2</div>
+        <div class="product-price">₹899</div>
+        <button>Buy Now</button>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <img src="https://via.placeholder.com/300x180.png?text=Product+3" alt="Product 3">
+        <div class="product-title">Product 3</div>
+        <div class="product-price">₹1299</div>
+        <button>Buy Now</button>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card">
+        <img src="https://via.placeholder.com/300x180.png?text=Product+4" alt="Product 4">
+        <div class="product-title">Product 4</div>
+        <div class="product-price">₹599</div>
+        <button>Buy Now</button>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
+
+
+
 
 <!-- ...other content... -->
 
