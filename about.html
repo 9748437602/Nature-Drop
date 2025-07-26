@@ -3,6 +3,296 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>ShopifyX - Your Smart Shop</title>
+  <meta name="description" content="ShopifyX - Best online store for your needs" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff;
+      color: #111;
+    }
+
+    header.ecom-header {
+      background-color: #ffffff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      color: #1a1a1a;
+      font-weight: 600;
+      gap: 10px;
+    }
+
+    .logo i {
+      color: #4caf50;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    $1max-width: 100%;
+    }
+
+    .search-box i {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      margin-left: 15px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      border-radius: 2px;
+    }
+
+    .side-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      position: fixed;
+      top: 60px;
+      right: 30px;
+      background: #fff;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      border-radius: 8px;
+      gap: 10px;
+      z-index: 1000;
+      transform: scale(0.95);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .side-menu.show {
+      transform: scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .side-menu a {
+      text-decoration: none;
+      color: #333;
+      padding: 8px 16px;
+      font-weight: 500;
+      border-radius: 5px;
+      background-color: #f5f5f5;
+      transition: background-color 0.3s;
+      white-space: nowrap;
+    }
+
+    .side-menu a:hover {
+      background-color: #e0e0e0;
+    }
+
+    .news-banner {
+      background: linear-gradient(to right, #ff6a00, #ee0979);
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+      animation: slideLeft 10s linear infinite;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    @keyframes slideLeft {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    .rotating-banner {
+    background: linear-gradient(to right, #ff6a00, #ee0979);
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .rotating-banner span {
+    display: inline-block;
+    position: relative;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+  }
+
+</style>
+
+  <script>
+    let menuTimeout;
+
+    function showMenu() {
+      clearTimeout(menuTimeout);
+      document.getElementById('sideMenu').classList.add('show');
+    }
+
+    function hideMenu() {
+      menuTimeout = setTimeout(() => {
+        document.getElementById('sideMenu').classList.remove('show');
+      }, 300);
+    }
+  function searchProduct() {
+  const query = document.querySelector('.search-box input').value.trim();
+  if (query) {
+    window.location.href = `/search?query=${encodeURIComponent(query)}`;
+  }
+}
+</script>
+</head>
+
+<body>
+  <!-- ✅ E-COMMERCE HEADER START -->
+  <header class="ecom-header">
+    <!-- 🔹 Logo Section -->
+    <div class="logo">
+      <i class="fas fa-store"></i>
+      <span>ShopifyX</span>
+    </div>
+
+    <!-- 🔹 Search Bar (centered) -->
+    <div class="search-box" style="
+    flex: 1;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+  ">
+    <input type="text" placeholder="Search products..." style="
+      padding: 12px 48px 12px 20px;
+      border: 2px solid #f06292;
+      border-radius: 30px;
+      font-size: 16px;
+      width: 100%;
+    " onkeydown="if(event.key==='Enter')searchProduct();" />
+    <button onclick="searchProduct()" style="
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #f06292;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    ">
+      <i class="fas fa-search" style="color: white; font-size: 14px;"></i>
+    </button>
+  </div>
+
+    <!-- 🔹 Hamburger Menu -->
+    <div class="header-right">
+      <div class="hamburger" onmouseover="showMenu()" onmouseleave="hideMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+  <!-- ✅ E-COMMERCE HEADER END -->
+
+  <!-- 🔹 Side Menu (Right Dropdown) -->
+  <nav id="sideMenu" class="side-menu" onmouseover="showMenu()" onmouseleave="hideMenu()">
+    <a href="#">Home</a>
+    <a href="#">Products</a>
+    <a href="about">About</a>
+    <a href="#">Contact</a>
+    <a href="Terms-&-Conditions">Terms & Conditions</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Shipping Info</a>
+    <a href="#">Returns & Refunds</a>
+    <a href="#">FAQ</a>
+    <a href="#">Help Center</a>
+    <a href="#">Login</a>
+    <a href="#">Register</a>
+  </nav>
+
+  
+<script>
+  const bannerMessages = [
+    "🎁 Flat 20% OFF on Electronics!",
+    "🚚 Free Delivery Above ₹499!",
+    "🔥 Buy 1 Get 1 Free on T-Shirts!",
+    "💳 10% Cashback on UPI Payments!",
+    "🛒 Mega Monsoon Sale: Up to 70% OFF!"
+  ];
+
+  const bannerText = document.getElementById("banner-text");
+  let currentIndex = 0;
+
+  function rotateBanner() {
+    bannerText.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+    bannerText.style.transform = 'translateX(100%)';
+    bannerText.style.opacity = 0;
+
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % bannerMessages.length;
+      bannerText.textContent = bannerMessages[currentIndex];
+      bannerText.style.transform = 'translateX(-100%)';
+      setTimeout(() => {
+        bannerText.style.transform = 'translateX(0)';
+        bannerText.style.opacity = 1;
+      }, 50);
+    }, 400);
+  }
+
+  setInterval(rotateBanner, 4000);
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us - ShopifyX</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -60,3 +350,4 @@
   </div>
 </body>
 </html>
+
