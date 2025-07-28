@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Product Details | Arif Digital Services</title>
+  <title>Swipeable Product Gallery</title>
 
   <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <style>
     body {
@@ -16,25 +16,26 @@
       padding: 20px;
     }
 
-    .product-container {
+    .container {
       max-width: 1100px;
       margin: auto;
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
       display: flex;
       flex-wrap: wrap;
-      overflow: hidden;
     }
 
     .left-side {
-      flex: 1 1 450px;
+      flex: 1 1 400px;
       padding: 20px;
       position: relative;
     }
 
     .swiper {
       width: 100%;
+      height: auto;
       border-radius: 10px;
       overflow: hidden;
     }
@@ -100,7 +101,7 @@
     }
 
     @media (max-width: 768px) {
-      .product-container {
+      .container {
         flex-direction: column;
       }
 
@@ -113,27 +114,24 @@
 </head>
 <body>
 
-<div class="product-container">
-  <!-- Left Side: Image Slider -->
+<div class="container">
+  <!-- Image Gallery -->
   <div class="left-side">
     <button class="share-btn" onclick="shareProduct()">🔗</button>
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
-        <!-- Slides -->
-        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-        <!-- Add as many as you want -->
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200"> alt="Product 1"></div>
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200"> alt="Product 2"></div>
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200"> alt="Product 3"></div>
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200"> alt="Product 4"></div>
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200"> alt="Product 5"></div>
       </div>
       <!-- Pagination Dots -->
       <div class="swiper-pagination"></div>
     </div>
   </div>
 
-  <!-- Right Side: Product Info -->
+  <!-- Product Info -->
   <div class="right-side">
     <h1>OPPO F29 PRO 5G (8/128 GB, Granite Black)</h1>
     <p class="price">₹24,999</p>
@@ -150,14 +148,17 @@
 </div>
 
 <!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  new Swiper(".mySwiper", {
+  const swiper = new Swiper(".mySwiper", {
     loop: false,
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
     },
+    grabCursor: true,         // Mouse drag
+    slidesPerView: 1,
+    spaceBetween: 10,
   });
 
   function shareProduct() {
