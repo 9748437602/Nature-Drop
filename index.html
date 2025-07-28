@@ -303,7 +303,6 @@
   <style>
     body {
       margin: 0;
-      padding: 20px;
       font-family: Arial, sans-serif;
       background: #ffe4ec;
       color: #333;
@@ -317,6 +316,12 @@
       font-size: 28px;
       font-weight: bold;
       letter-spacing: 1px;
+    }
+
+     @media (max-width: 600px) {
+      .products-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .container {
