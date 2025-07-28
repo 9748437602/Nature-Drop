@@ -2,166 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>iQOO Neo 9 Pro 5G - Product Page</title>
-
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details | Nature Drop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
+      font-family: 'Poppins', sans-serif;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      padding: 0;
+      background: #f4f4f4;
     }
-
     .container {
-      max-width: 1100px;
-      margin: auto;
-      background: white;
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 20px;
+    }
+    .product-details {
       display: flex;
       flex-wrap: wrap;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 10px;
-    }
-
-    .left {
-      flex: 1 1 450px;
-      position: relative;
-    }
-
-    .swiper {
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .swiper-slide img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-
-    .swiper-pagination {
-      bottom: 10px !important;
-    }
-
-    .share-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #007bff;
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    .right {
-      flex: 1 1 600px;
+      gap: 30px;
+      background: #fff;
       padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    .right h1 {
-      font-size: 26px;
+    .product-images {
+      flex: 1;
+      min-width: 300px;
+    }
+    .product-images img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: contain;
+      border: 1px solid #eee;
+      border-radius: 8px;
+    }
+    .thumbnail-list {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .thumbnail-list img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .product-info {
+      flex: 1;
+      min-width: 300px;
+    }
+    .product-info h1 {
+      font-size: 28px;
       margin-bottom: 10px;
     }
-
-    .price {
+    .product-info p.price {
       font-size: 22px;
       color: green;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
-
-    .specs {
-      margin-top: 20px;
-    }
-
-    .specs ul {
-      padding-left: 20px;
-    }
-
-    .buy-btn {
-      margin-top: 20px;
-      padding: 12px 25px;
-      background: #ff5722;
-      color: white;
+    .product-info button {
+      padding: 12px 20px;
+      background: #f06292;
       border: none;
+      color: #fff;
       border-radius: 5px;
       font-size: 16px;
       cursor: pointer;
-      text-decoration: none;
     }
-
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
+    .share-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 20px;
+      color: #f06292;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-
 <div class="container">
-  <!-- Left: Product Image Gallery -->
-  <div class="left">
-    <button class="share-btn" onclick="shareProduct()">🔗</button>
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-        <div class="swiper-slide"><img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-        <div class="swiper-slide"><img src="images/cri pump.png" alt="Product Image" width="300" height="200"></div>
-        <div class="swiper-slide"><img src="images/cri pump.png" alt="Product Image" width="300" height="200"></div>
-        <!-- Add more PNGs as needed -->
+  <div class="product-details">
+    <div class="product-images">
+      <i class="fas fa-share-alt share-icon"></i>
+      <img id="mainImage" src="images/cri%20pump.png" alt="Product Image" />
+      <div class="thumbnail-list">
+        <img src="images/cri pump.png" onclick="changeImage(this.src)" />
+        <img src="images/cri%20pump%202.png" onclick="changeImage(this.src)" />
+        <img src="images/cri%20pump%203.png" onclick="changeImage(this.src)" />
+        <img src="images/cri%20pump%204.png" onclick="changeImage(this.src)" />
       </div>
-      <div class="swiper-pagination"></div>
     </div>
-  </div>
-
-  <!-- Right: Product Info -->
-  <div class="right">
-    <h1>iQOO Neo 9 Pro 5G (Fiery Red, 8GB RAM, 256GB Storage)</h1>
-    <p class="price">₹34,999</p>
-    
-    <p><strong>Key Features:</strong></p>
-    <div class="specs">
-      <ul>
-        <li>6.78" LTPO AMOLED Display, 144Hz</li>
-        <li>Snapdragon 8 Gen 2 Processor + Q1 Chip</li>
-        <li>50MP Sony IMX920 Camera (OIS) + 8MP Ultra-wide</li>
-        <li>16MP Selfie Camera</li>
-        <li>5160mAh Battery, 120W Fast Charging</li>
-        <li>Android 14 with Funtouch OS 14</li>
-        <li>Fiery Red Vegan Leather Back</li>
-      </ul>
+    <div class="product-info">
+      <h1>CRI Water Pump 1HP</h1>
+      <p class="price">₹3,999</p>
+      <p>Powerful 1HP CRI water pump suitable for home and agricultural use. Energy-efficient and built to last.</p>
+      <button>Buy Now</button>
     </div>
-
-    <a href="#" class="buy-btn">Buy Now</a>
   </div>
 </div>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  const swiper = new Swiper(".mySwiper", {
-    loop: false,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-  });
-
-  function shareProduct() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url);
-    alert("✅ Product link copied!");
+  function changeImage(src) {
+    document.getElementById('mainImage').src = src;
   }
 </script>
-
 </body>
 </html>
