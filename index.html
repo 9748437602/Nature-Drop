@@ -68,11 +68,10 @@
     .hamburger {
       display: flex;
       flex-direction: column;
-      cursor: pointer;
       gap: 4px;
-      margin-left: 15px;
+      cursor: pointer;
+      position: relative;
     }
-
     .hamburger span {
       width: 25px;
       height: 3px;
@@ -80,25 +79,15 @@
       border-radius: 2px;
     }
 
-    .side-menu {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      position: fixed;
-      top: 60px;
-      right: 30px;
-      background: #fff;
-      padding: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      border-radius: 8px;
-      gap: 10px;
-      z-index: 1000;
-      transform: scale(0.95);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      max-height: 60vh;
-      overflow-y: auto;
+    .side-menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .side-menu a:hover {
+      background-color: #f0f0f0;
     }
 
     .side-menu.show {
