@@ -5,175 +5,182 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product Details | Arif Digital Services</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 20px;
+      margin: 0;
+      padding: 0;
+      background: #f0f0f0;
     }
 
     .container {
-      max-width: 1000px;
-      margin: auto;
+      max-width: 1100px;
+      margin: 30px auto;
       background: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 10px;
-    }
-
-    .product {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    .product-image {
-      flex: 1 1 300px;
+    .left {
+      flex: 1 1 400px;
       text-align: center;
+      position: relative;
+    }
+
+    .main-image {
+      position: relative;
     }
 
     .main-image img {
       width: 100%;
       max-width: 400px;
-      height: auto;
       border-radius: 10px;
     }
 
-    .dots {
-      margin-top: 15px;
+    .share-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .thumbnails {
       display: flex;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
     }
 
-    .dot {
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background-color: #ccc;
+    .thumbnails img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 5px;
       cursor: pointer;
-      transition: 0.3s;
+      border: 2px solid transparent;
     }
 
-    .dot.active {
-      background-color: #007bff;
+    .thumbnails img.active {
+      border: 2px solid #007bff;
     }
 
-    .product-details {
-      flex: 2 1 400px;
+    .right {
+      flex: 1 1 500px;
+      padding: 20px;
     }
 
-    .product-details h1 {
+    .right h1 {
       font-size: 24px;
       margin-bottom: 10px;
     }
 
-    .product-details p {
-      margin: 10px 0;
-      line-height: 1.6;
-    }
-
     .price {
       font-size: 22px;
-      font-weight: bold;
       color: green;
+      margin-bottom: 15px;
+    }
+
+    .right ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
     }
 
     .buy-btn {
-      display: inline-block;
       background: #ff6600;
-      color: #fff;
+      color: white;
       padding: 12px 25px;
-      margin-top: 20px;
       text-decoration: none;
       border-radius: 5px;
-      transition: 0.3s;
-    }
-
-    .buy-btn:hover {
-      background: #e65c00;
+      display: inline-block;
     }
 
     @media (max-width: 768px) {
-      .product {
+      .container {
         flex-direction: column;
-        align-items: center;
       }
 
-      .product-details {
-        text-align: center;
+      .right {
+        padding: 0;
       }
 
-      .buy-btn {
-        width: 100%;
+      .main-image img {
+        max-width: 100%;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="product">
-      <div class="product-image">
-        <div class="main-image">
-          <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-        </div>
-        <div class="dots" id="dotContainer">
-          <!-- Dots will be inserted here -->
-        </div>
-      </div>
-      <div class="product-details">
-        <h1>OPPO F29 PRO 5G (8/128 GB, Granite Black)</h1>
-        <p class="price">₹24,999</p>
-        <p><strong>Highlights:</strong></p>
-        <ul>
-          <li>8 GB RAM | 128 GB Storage</li>
-          <li>5G Connectivity</li>
-          <li>6.7" AMOLED Display</li>
-          <li>5000 mAh Battery</li>
-          <li>Color: Granite Black</li>
-        </ul>
-        <a href="#" class="buy-btn">Buy Now</a>
-      </div>
+<div class="container">
+  <!-- Left Side -->
+  <div class="left">
+    <div class="main-image">
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+      <button class="share-btn" onclick="shareProduct()">🔗</button>
+    </div>
+    <div class="thumbnails" id="thumbnails">
+      <!-- Thumbnails will be added dynamically -->
     </div>
   </div>
 
-  <script>
-    const images = [
-      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">,
-      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">,
-      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">,
-      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
-      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+  <!-- Right Side -->
+  <div class="right">
+    <h1>OPPO F29 PRO 5G (8/128 GB, Granite Black)</h1>
+    <p class="price">₹24,999</p>
+    <p><strong>Highlights:</strong></p>
+    <ul>
+      <li>8 GB RAM | 128 GB Storage</li>
+      <li>5G Connectivity</li>
+      <li>6.7" AMOLED Display</li>
+      <li>5000 mAh Battery</li>
+      <li>Color: Granite Black</li>
+    </ul>
+    <a href="#" class="buy-btn">Buy Now</a>
+  </div>
+</div>
 
-    const mainImg = document.getElementById("mainImg");
-    const dotContainer = document.getElementById("dotContainer");
+<script>
+  const images = [
+    "https://via.placeholder.com/400x400.png?text=Product+1",
+    "https://via.placeholder.com/400x400.png?text=Product+2",
+    "https://via.placeholder.com/400x400.png?text=Product+3",
+    "https://via.placeholder.com/400x400.png?text=Product+4",
+    "https://via.placeholder.com/400x400.png?text=Product+5"
+  ];
 
-    // Create dots dynamically
-    images.forEach((img, index) => {
-      const dot = document.createElement("div");
-      dot.classList.add("dot");
-      if (index === 0) dot.classList.add("active");
+  const mainImg = document.getElementById("mainImg");
+  const thumbnails = document.getElementById("thumbnails");
 
-      dot.addEventListener("click", () => {
-        mainImg.src = images[index];
-        document.querySelectorAll(".dot").forEach(d => d.classList.remove("active"));
-        dot.classList.add("active");
-      });
+  images.forEach((img, index) => {
+    const thumb = document.createElement("img");
+    thumb.src = img;
+    if (index === 0) thumb.classList.add("active");
 
-      dotContainer.appendChild(dot);
+    thumb.addEventListener("click", () => {
+      document.querySelectorAll(".thumbnails img").forEach(t => t.classList.remove("active"));
+      thumb.classList.add("active");
+      mainImg.src = img;
     });
-  </script>
+
+    thumbnails.appendChild(thumb);
+  });
+
+  function shareProduct() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    alert("Product link copied to clipboard!");
+  }
+</script>
 
 </body>
 </html>
