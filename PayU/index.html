@@ -1,24 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PayU Payment Gateway</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #ffffff20;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      color: #eee;
+    }
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+    input[type="submit"] {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background-color: #00c853;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    input[type="submit"]:hover {
+      background-color: #00b140;
+    }
+  </style>
 </head>
 <body>
-  <h2>PayU Payment Demo</h2>
-  <form action="payu_payment.php" method="post">
-    <label>Amount:</label>
-    <input type="text" name="amount" value="10" required><br><br>
+  <div class="container">
+    <h2>PayU Payment Demo</h2>
+    <form action="payu_payment.php" method="post">
+      <label for="amount">Amount:</label>
+      <input type="text" name="amount" value="10" required>
 
-    <label>First Name:</label>
-    <input type="text" name="firstname" value="Arif"><br><br>
+      <label for="firstname">First Name:</label>
+      <input type="text" name="firstname" value="Arif">
 
-    <label>Email:</label>
-    <input type="email" name="email" value="test@example.com"><br><br>
+      <label for="email">Email:</label>
+      <input type="email" name="email" value="test@example.com">
 
-    <label>Phone:</label>
-    <input type="text" name="phone" value="9999999999"><br><br>
+      <label for="phone">Phone:</label>
+      <input type="text" name="phone" value="9999999999">
 
-    <input type="submit" value="Pay Now with PayU">
-  </form>
+      <input type="submit" value="Pay Now with PayU">
+    </form>
+  </div>
 </body>
 </html>
