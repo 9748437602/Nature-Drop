@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>ShopifyX - Your Smart Shop</title>
+  <title>Nature Drop - Your Smart Shop</title>
   <meta name="description" content="ShopifyX - Best online store for your needs" />
 
   <!-- Google Fonts -->
@@ -15,10 +15,9 @@
 
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
     }
 
     body {
@@ -299,47 +298,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Products | Nature Drop</title>
+  <title>Product List - Pink Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #ffe4ec;
-      color: #333;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
     }
 
-    header {
-      background: #ff69b4;
-      padding: 15px 20px;
+    body {
+      background-color: #fff0f5;
+      padding: 20px;
+    }
+
+    h1 {
       text-align: center;
-      color: white;
-      font-size: 28px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-
-    h2 {
-      text-align: center;
-      color: #d6006c;
-      margin-bottom: 20px;
+      color: #e91e63;
+      margin-bottom: 30px;
+      font-weight: 600;
     }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 20px;
     }
 
+    @media (min-width: 500px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
     .product-card {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2);
       overflow: hidden;
       transition: transform 0.3s ease;
     }
@@ -350,50 +352,46 @@
 
     .product-card img {
       width: 100%;
-      height: 200px;
+      height: 180px;
       object-fit: cover;
     }
 
-    .product-info {
+    .product-details {
       padding: 15px;
       text-align: center;
     }
 
-    .product-info h4 {
+    .product-details h2 {
       font-size: 18px;
+      color: #333;
       margin-bottom: 10px;
-      color: #ff1493;
     }
 
-    .product-info p {
+    .product-details p {
+      color: #e91e63;
       font-size: 16px;
-      margin-bottom: 15px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
-    .product-info a {
-      text-decoration: none;
-      background: #ff1493;
+    .product-details button {
+      background: #ffc0cb;
+      border: none;
       color: white;
-      padding: 8px 16px;
-      border-radius: 5px;
-      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
       transition: background 0.3s ease;
     }
 
-    .product-info a:hover {
-      background: #c71585;
-    }
-
-    footer {
-      background: #ff69b4;
-      padding: 10px;
-      text-align: center;
-      color: white;
-      margin-top: 40px;
+    .product-details button:hover {
+      background: #e91e63;
     }
   </style>
 </head>
 <body>
+
+  <h1>Our Products</h1>
 
  
 
