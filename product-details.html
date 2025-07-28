@@ -4,186 +4,166 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product Details | Arif Digital Services</title>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f5f5f5;
       margin: 0;
-      padding: 0;
-      background: #f0f0f0;
+      padding: 20px;
     }
 
-    .container {
+    .product-container {
       max-width: 1100px;
-      margin: 30px auto;
+      margin: auto;
       background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-wrap: wrap;
+      overflow: hidden;
+    }
+
+    .left-side {
+      flex: 1 1 450px;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .left {
-      flex: 1 1 400px;
-      text-align: center;
       position: relative;
     }
 
-    .main-image {
-      position: relative;
-    }
-
-    .main-image img {
+    .swiper {
       width: 100%;
-      max-width: 400px;
       border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .swiper-pagination-bullets {
+      bottom: 10px !important;
     }
 
     .share-btn {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 20px;
+      right: 30px;
       background: #007bff;
-      color: white;
+      color: #fff;
       border: none;
       border-radius: 50%;
-      width: 35px;
-      height: 35px;
-      cursor: pointer;
+      width: 36px;
+      height: 36px;
       font-size: 18px;
-    }
-
-    .thumbnails {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-
-    .thumbnails img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 5px;
       cursor: pointer;
-      border: 2px solid transparent;
     }
 
-    .thumbnails img.active {
-      border: 2px solid #007bff;
+    .right-side {
+      flex: 1 1 600px;
+      padding: 30px 20px;
     }
 
-    .right {
-      flex: 1 1 500px;
-      padding: 20px;
-    }
-
-    .right h1 {
-      font-size: 24px;
-      margin-bottom: 10px;
+    .right-side h1 {
+      font-size: 26px;
+      margin-bottom: 15px;
     }
 
     .price {
       font-size: 22px;
       color: green;
-      margin-bottom: 15px;
-    }
-
-    .right ul {
-      padding-left: 20px;
       margin-bottom: 20px;
     }
 
+    .right-side ul {
+      margin-bottom: 25px;
+      padding-left: 20px;
+    }
+
     .buy-btn {
-      background: #ff6600;
+      background: #ff5722;
       color: white;
-      padding: 12px 25px;
+      padding: 12px 30px;
+      font-size: 16px;
       text-decoration: none;
-      border-radius: 5px;
+      border-radius: 6px;
+      transition: 0.3s;
       display: inline-block;
     }
 
+    .buy-btn:hover {
+      background: #e64a19;
+    }
+
     @media (max-width: 768px) {
-      .container {
+      .product-container {
         flex-direction: column;
       }
 
-      .right {
-        padding: 0;
-      }
-
-      .main-image img {
-        max-width: 100%;
+      .left-side,
+      .right-side {
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- Left Side -->
-  <div class="left">
-    <div class="main-image">
-      <img src="images/cri pump.png" alt="Product Image" width="400" height="400">
-      <button class="share-btn" onclick="shareProduct()">🔗</button>
-    </div>
-    <div class="thumbnails" id="thumbnails">
-      <!-- Thumbnails will be added dynamically -->
+<div class="product-container">
+  <!-- Left Side: Image Slider -->
+  <div class="left-side">
+    <button class="share-btn" onclick="shareProduct()">🔗</button>
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+        <!-- Add as many as you want -->
+      </div>
+      <!-- Pagination Dots -->
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 
-  <!-- Right Side -->
-  <div class="right">
+  <!-- Right Side: Product Info -->
+  <div class="right-side">
     <h1>OPPO F29 PRO 5G (8/128 GB, Granite Black)</h1>
     <p class="price">₹24,999</p>
     <p><strong>Highlights:</strong></p>
     <ul>
       <li>8 GB RAM | 128 GB Storage</li>
-      <li>5G Connectivity</li>
+      <li>5G Dual SIM</li>
       <li>6.7" AMOLED Display</li>
-      <li>5000 mAh Battery</li>
+      <li>64MP Camera | 5000 mAh Battery</li>
       <li>Color: Granite Black</li>
     </ul>
     <a href="#" class="buy-btn">Buy Now</a>
   </div>
 </div>
 
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
-  const images = [
-    <img src="images/cri pump.png" alt="Product Image" width="400" height="400">,
-    <img src="images/cri pump.png" alt="Product Image" width="400" height="400">,
-    <img src="images/cri pump.png" alt="Product Image" width="400" height="400">,
-    <img src="images/cri pump.png" alt="Product Image" width="400" height="400">,
-    <img src="images/cri pump.png" alt="Product Image" width="400" height="400">,
-    <img src="images/cri pump.png" alt="Product Image" width="400" height="400">,
-    <img src="images/cri pump.png" alt="Product Image" width="400" height="400">,
-    <img src="images/cri pump.png" alt="Product Image" width="400" height="400">,
-    <img src="images/cri pump.png" alt="Product Image" width="400" height="400">,
-    <img src="images/cri pump.png" alt="Product Image" width="400" height="400">,
-  ];
-
-  const mainImg = document.getElementById("mainImg");
-  const thumbnails = document.getElementById("thumbnails");
-
-  images.forEach((img, index) => {
-    const thumb = document.createElement("img");
-    thumb.src = img;
-    if (index === 0) thumb.classList.add("active");
-
-    thumb.addEventListener("click", () => {
-      document.querySelectorAll(".thumbnails img").forEach(t => t.classList.remove("active"));
-      thumb.classList.add("active");
-      mainImg.src = img;
-    });
-
-    thumbnails.appendChild(thumb);
+  new Swiper(".mySwiper", {
+    loop: false,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
   });
 
   function shareProduct() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url);
-    alert("Product link copied to clipboard!");
+    const link = window.location.href;
+    navigator.clipboard.writeText(link);
+    alert("✅ Product link copied to clipboard!");
   }
 </script>
 
