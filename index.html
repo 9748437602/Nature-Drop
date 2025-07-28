@@ -397,9 +397,20 @@
 
  
 
-  <div class="container">
-    <h2>Products</h2>
-    <div class="product-grid">
+  <style>
+  .products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
+
+  /* 🟣 Add this new part */
+  @media (max-width: 600px) {
+    .products-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 boxes per row on mobile */
+    }
+  }
+</style>
 
       <!-- 30 Product Cards -->
       <!-- We'll use a looped pattern for clarity -->
