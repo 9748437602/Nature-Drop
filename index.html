@@ -318,12 +318,6 @@
       letter-spacing: 1px;
     }
 
-     @media (max-width: 600px) {
-      .products-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
     .container {
       max-width: 1200px;
       margin: 30px auto;
@@ -336,10 +330,10 @@
       margin-bottom: 20px;
     }
 
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
+    @media (max-width: 600px) {
+      .products-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .product-card {
