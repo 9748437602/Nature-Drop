@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Product Details | Arif Goldar</title>
+  <title>Product Details | Arif Digital Services</title>
   <style>
     * {
       margin: 0;
@@ -34,13 +34,34 @@
 
     .product-image {
       flex: 1 1 300px;
+      text-align: center;
     }
 
-    .product-image img {
+    .main-image img {
       width: 100%;
       max-width: 400px;
       height: auto;
       border-radius: 10px;
+    }
+
+    .dots {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #ccc;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .dot.active {
+      background-color: #007bff;
     }
 
     .product-details {
@@ -99,10 +120,15 @@
   <div class="container">
     <div class="product">
       <div class="product-image">
-        <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+        <div class="main-image">
+          <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+        </div>
+        <div class="dots" id="dotContainer">
+          <!-- Dots will be inserted here -->
+        </div>
       </div>
       <div class="product-details">
-        <h1>cri pump (8/128 GB, Granite Black)</h1>
+        <h1>OPPO F29 PRO 5G (8/128 GB, Granite Black)</h1>
         <p class="price">₹24,999</p>
         <p><strong>Highlights:</strong></p>
         <ul>
@@ -116,6 +142,38 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const images = [
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">,
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">,
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">,
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+      <img src="images/cri pump.png" alt="Product Image" width="300" height="200">
+
+    const mainImg = document.getElementById("mainImg");
+    const dotContainer = document.getElementById("dotContainer");
+
+    // Create dots dynamically
+    images.forEach((img, index) => {
+      const dot = document.createElement("div");
+      dot.classList.add("dot");
+      if (index === 0) dot.classList.add("active");
+
+      dot.addEventListener("click", () => {
+        mainImg.src = images[index];
+        document.querySelectorAll(".dot").forEach(d => d.classList.remove("active"));
+        dot.classList.add("active");
+      });
+
+      dotContainer.appendChild(dot);
+    });
+  </script>
 
 </body>
 </html>
