@@ -255,7 +255,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website with Auto-Scrolling Banner</title>
+    <title>Auto-Scrolling Banner</title>
     <style>
         /* Basic Reset */
         * {
@@ -263,14 +263,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: #333;
-            color: white;
-            padding: 15px 0;
-            text-align: center;
         }
 
         /* Banner Container */
@@ -357,23 +349,19 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>My Website Header</h1>
-    </header>
-
     <div class="banner-container">
         <div class="banner-slides">
             <div class="banner-slide">
-                <img src="images/ads banner.png" alt="Advertisement 1">
+                <img src="images/ads banner" alt="Advertisement 1">
             </div>
             <div class="banner-slide">
-                <img src="images/ads banner.png" alt="Advertisement 2">
+                <img src="images/ads banner" alt="Advertisement 2">
             </div>
             <div class="banner-slide">
-                <img src="images/ads banner.png" alt="Advertisement 3">
+                <img src="images/ads banner" alt="Advertisement 3">
             </div>
             <div class="banner-slide">
-                <img src="images/ads banner.png" alt="Advertisement 4">
+                <img src="images/ads banner" alt="Advertisement 4">
             </div>
         </div>
 
@@ -406,7 +394,7 @@
             let currentIndex = 0;
             const totalSlides = slideItems.length;
             let autoScrollInterval;
-            const slideInterval = 4000; // 4 seconds
+            const slideInterval = 8000; // 8 seconds
 
             // Function to go to specific slide
             function goToSlide(index) {
@@ -492,7 +480,6 @@
     </script>
 </body>
 </html>
-
 
 
 
