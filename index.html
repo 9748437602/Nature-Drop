@@ -1416,9 +1416,404 @@
                     background: rgba(255, 255, 255, 0.6);
                     transform: scale(0);
                 }
+                    
             `;
             document.head.appendChild(style);
         });
+
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .product-grid-container {
+            max-width: 100%;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .product-grid {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 10px;
+            padding-bottom: 10px;
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+        }
+
+        .product-grid::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari */
+        }
+
+        .product-card {
+            flex: 0 0 calc(25% - 8px); /* 4 items per row on mobile */
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 10px;
+            position: relative; /* For discount badge positioning */
+            transition: transform 0.3s ease; /* Smooth zoom transition */
+        }
+
+        .product-card:hover {
+            transform: scale(1.05); /* Zoom-in effect on hover */
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-card h3 {
+            font-size: 14px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .price-container {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .original-price {
+            font-size: 14px;
+            color: #888;
+            text-decoration: line-through;
+        }
+
+        .current-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e44d26;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ffcc00;
+            color: #333;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 8px;
+            border-radius: 3px;
+        }
+
+        .view-details-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 5px auto 10px; /* Position below price */
+            transition: background-color 0.3s;
+        }
+
+        .view-details-btn:hover {
+            background-color: #555;
+        }
+
+        /* Responsive design for larger screens */
+        @media (min-width: 768px) {
+            .product-card {
+                flex: 0 0 calc(20% - 10px); /* 5 items per row on tablet */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .product-card {
+                flex: 0 0 calc(16.66% - 10px); /* 6 items per row on desktop */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Expansive Product</div>
+    <div class="product-grid-container">
+        <div class="product-grid" id="productGrid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 1">
+                <div class="discount-badge">10% OFF</div>
+                <h3>Product 1</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$22.21</span>
+                    <span class="current-price">$19.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 1', '$19.99', '10% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 2">
+                <div class="discount-badge">15% OFF</div>
+                <h3>Product 2</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$29.40</span>
+                    <span class="current-price">$24.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 2', '$24.99', '15% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 3">
+                <div class="discount-badge">20% OFF</div>
+                <h3>Product 3</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$37.49</span>
+                    <span class="current-price">$29.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 3', '$29.99', '20% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 4">
+                <div class="discount-badge">25% OFF</div>
+                <h3>Product 4</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$19.99</span>
+                    <span class="current-price">$14.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 4', '$14.99', '25% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 5">
+                <div class="discount-badge">30% OFF</div>
+                <h3>Product 5</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$49.99</span>
+                    <span class="current-price">$34.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 5', '$34.99', '30% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 6">
+                <div class="discount-badge">35% OFF</div>
+                <h3>Product 6</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$61.52</span>
+                    <span class="current-price">$39.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 6', '$39.99', '35% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 7">
+                <div class="discount-badge">40% OFF</div>
+                <h3>Product 7</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$74.98</span>
+                    <span class="current-price">$44.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 7', '$44.99', '40% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 8">
+                <div class="discount-badge">45% OFF</div>
+                <h3>Product 8</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$90.89</span>
+                    <span class="current-price">$49.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 8', '$49.99', '45% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 9">
+                <div class="discount-badge">50% OFF</div>
+                <h3>Product 9</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$45.98</span>
+                    <span class="current-price">$22.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 9', '$22.99', '50% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 10">
+                <div class="discount-badge">12% OFF</div>
+                <h3>Product 10</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$31.80</span>
+                    <span class="current-price">$27.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 10', '$27.99', '12% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 11">
+                <div class="discount-badge">18% OFF</div>
+                <h3>Product 11</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$40.23</span>
+                    <span class="current-price">$32.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 11', '$32.99', '18% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 12">
+                <div class="discount-badge">22% OFF</div>
+                <h3>Product 12</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$23.06</span>
+                    <span class="current-price">$17.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 12', '$17.99', '22% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 13">
+                <div class="discount-badge">28% OFF</div>
+                <h3>Product 13</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$52.76</span>
+                    <span class="current-price">$37.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 13', '$37.99', '28% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 14">
+                <div class="discount-badge">33% OFF</div>
+                <h3>Product 14</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$64.16</span>
+                    <span class="current-price">$42.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 14', '$42.99', '33% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 15">
+                <div class="discount-badge">38% OFF</div>
+                <h3>Product 15</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$77.40</span>
+                    <span class="current-price">$47.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 15', '$47.99', '38% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 16">
+                <div class="discount-badge">43% OFF</div>
+                <h3>Product 16</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$92.96</span>
+                    <span class="current-price">$52.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 16', '$52.99', '43% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 17">
+                <div class="discount-badge">15% OFF</div>
+                <h3>Product 17</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$30.58</span>
+                    <span class="current-price">$25.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 17', '$25.99', '15% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 18">
+                <div class="discount-badge">20% OFF</div>
+                <h3>Product 18</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$38.74</span>
+                    <span class="current-price">$30.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 18', '$30.99', '20% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 19">
+                <div class="discount-badge">25% OFF</div>
+                <h3>Product 19</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$47.99</span>
+                    <span class="current-price">$35.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 19', '$35.99', '25% OFF')">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 20">
+                <div class="discount-badge">30% OFF</div>
+                <h3>Product 20</h3>
+                <p>Short description</p>
+                <div class="price-container">
+                    <span class="original-price">$58.56</span>
+                    <span class="current-price">$40.99</span>
+                </div>
+                <button class="view-details-btn" onclick="showDetails('Product 20', '$40.99', '30% OFF')">View Details</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const grid = document.getElementById('productGrid');
+        const scrollAmount = grid.clientWidth; // Scroll by the width of the grid container
+
+        function autoScroll() {
+            if (grid.scrollLeft + grid.clientWidth >= grid.scrollWidth) {
+                grid.scrollTo({ left: 0, behavior: 'smooth' }); // Reset to start
+            } else {
+                grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        // Auto-scroll every 6 seconds
+        let scrollInterval = setInterval(autoScroll, 6000);
+
+        // Pause auto-scroll on touch interaction
+        grid.addEventListener('touchstart', () => {
+            clearInterval(scrollInterval);
+        });
+
+        // Resume auto-scroll after touch ends
+        grid.addEventListener('touchend', () => {
+            setTimeout(() => {
+                scrollInterval = setInterval(autoScroll, 6000);
+            }, 5000); // Resume after 5 seconds of inactivity
+        });
+
+        // Show product details (placeholder action)
+        function showDetails(productName, price, discount) {
+         
     </script>
 </body>
 </html>
