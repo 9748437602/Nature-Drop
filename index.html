@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NatureDrop - Premium Products</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Global Styles */
         * {
@@ -17,6 +17,8 @@
         body {
             background-color: #fff5f7;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         /* Header Styles */
@@ -304,6 +306,7 @@
             padding: 30px 5%;
             max-width: 1400px;
             margin: 0 auto;
+            flex: 1;
         }
         
         .section-title {
@@ -489,6 +492,439 @@
         .product-card:nth-child(8) { animation-delay: 0.8s; }
         .product-card:nth-child(9) { animation-delay: 0.9s; }
         .product-card:nth-child(10) { animation-delay: 1s; }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(to bottom, #ffffff, #f8e8e8);
+            color: #333;
+            padding: 50px 0 20px;
+            width: 100%;
+            max-width: 100%;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -10px 30px rgba(209, 77, 114, 0.15);
+            position: relative;
+            overflow: hidden;
+            margin-top: 40px;
+            animation: fadeIn 1.2s ease-out;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(209, 77, 114, 0.1);
+        }
+        
+        .footer:hover {
+            transform: rotateX(5deg) translateY(-10px);
+            box-shadow: 0 -15px 40px rgba(209, 77, 114, 0.2);
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #d14d72, #f8b0b0);
+            animation: borderPulse 3s infinite;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 220px;
+            margin-bottom: 30px;
+            animation: slideUp 0.8s ease-out;
+            animation-fill-mode: both;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 5px 15px rgba(209, 77, 114, 0.05);
+        }
+        
+        .footer-section:hover {
+            transform: translateY(-10px) translateZ(20px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 25px rgba(209, 77, 114, 0.15);
+        }
+        
+        .footer-section:nth-child(1) { animation-delay: 0.1s; }
+        .footer-section:nth-child(2) { animation-delay: 0.2s; }
+        .footer-section:nth-child(3) { animation-delay: 0.3s; }
+        .footer-section:nth-child(4) { animation-delay: 0.4s; }
+        .footer-section:nth-child(5) { animation-delay: 0.5s; }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            font-weight: 600;
+            color: #d14d72;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(to right, #d14d72, #f8b0b0);
+            border-radius: 3px;
+            transition: width 0.4s ease;
+        }
+        
+        .footer-section:hover h3:after {
+            width: 70px;
+        }
+        
+        .about p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            transform: translateZ(10px);
+        }
+        
+        .socials {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .socials a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: rgba(209, 77, 114, 0.1);
+            color: #d14d72;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            transform: translateY(0) translateZ(0);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .socials a::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(209, 77, 114, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+        }
+        
+        .socials a:hover {
+            background: #d14d72;
+            color: white;
+            transform: translateY(-5px) scale(1.1) translateZ(10px);
+            box-shadow: 0 8px 20px rgba(209, 77, 114, 0.3);
+        }
+        
+        .socials a:hover::after {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .links ul {
+            list-style: none;
+        }
+        
+        .links ul li {
+            margin-bottom: 12px;
+            transform: translateX(0) translateZ(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .links ul li:hover {
+            transform: translateX(10px) translateZ(10px);
+        }
+        
+        .links ul li a {
+            color: #555;
+            text-decoration: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        
+        .links ul li:hover a {
+            background: rgba(209, 77, 114, 0.1);
+        }
+        
+        .links ul li a i {
+            margin-right: 10px;
+            color: #d14d72;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .links ul li:hover a i {
+            transform: rotate(90deg);
+            color: #f8b0b0;
+        }
+        
+        .links ul li a:hover {
+            color: #d14d72;
+        }
+        
+        .contact span {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            color: #555;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transform: translateZ(0);
+        }
+        
+        .contact span:hover {
+            background: rgba(209, 77, 114, 0.1);
+            color: #d14d72;
+            transform: translateX(5px) translateZ(10px);
+        }
+        
+        .contact i {
+            margin-right: 15px;
+            color: #d14d72;
+            min-width: 20px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact span:hover i {
+            color: #f8b0b0;
+            transform: scale(1.2);
+        }
+        
+        .newsletter p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1rem;
+            transform: translateZ(10px);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(209, 77, 114, 0.2);
+            transition: all 0.3s ease;
+            transform: translateZ(10px);
+        }
+        
+        .newsletter-form:hover {
+            border-color: rgba(209, 77, 114, 0.4);
+            box-shadow: 0 0 15px rgba(209, 77, 114, 0.2);
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 18px;
+            border: none;
+            background: transparent;
+            color: #555;
+            outline: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form input:focus {
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .newsletter-form input::placeholder {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-form button {
+            background: linear-gradient(to right, #d14d72, #f8b0b0);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter-form button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .newsletter-form button:hover {
+            background: linear-gradient(to right, #f8b0b0, #d14d72);
+            padding: 0 30px;
+            letter-spacing: 1px;
+        }
+        
+        .newsletter-form button:hover::after {
+            width: 400px;
+            height: 400px;
+        }
+        
+        .newsletter-form button:active {
+            transform: scale(0.95);
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding: 25px 30px 10px;
+            border-top: 1px solid rgba(209, 77, 114, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            transform: translateZ(20px);
+        }
+        
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+            animation: fadeIn 2s ease-in;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+            position: relative;
+            padding-bottom: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #f8b0b0;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #d14d72;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes borderPulse {
+            0% { box-shadow: 0 0 0 0 rgba(209, 77, 114, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(209, 77, 114, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(209, 77, 114, 0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) translateZ(0); }
+            50% { transform: translateY(-15px) translateZ(20px); }
+            100% { transform: translateY(0px) translateZ(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .footer-content {
+                gap: 25px;
+            }
+            
+            .footer-section {
+                min-width: 45%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .footer-links {
+                justify-content: center;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+            
+            .footer {
+                transform: rotateX(0deg) !important;
+            }
+            
+            .footer:hover {
+                transform: rotateX(0deg) translateY(-15px) !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -716,6 +1152,71 @@
         </div>
     </div>
 
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>NatureDrop</h3>
+                <p>Your premier destination for premium natural products. We offer curated collections with express delivery to your doorstep.</p>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Shop Categories</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Skincare</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Haircare</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Wellness</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Accessories</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Customer Care</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> FAQs</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Shipping Policy</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Returns & Exchanges</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <span><i class="fas fa-map-marker-alt"></i> 123 Nature Lane, Eco City</span>
+                <span><i class="fas fa-phone"></i> +1 (800) 555-1234</span>
+                <span><i class="fas fa-envelope"></i> info@naturedrops.com</span>
+                <span><i class="fas fa-clock"></i> Mon-Sat: 9AM-8PM, Sun: 10AM-6PM</span>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get 10% off your first order and exclusive offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit">JOIN</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">
+                &copy; 2023 NatureDrop. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color:#d14d72;"></i> for Nature Lovers
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Sitemap</a>
+                <a href="#">Accessibility</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
         // Header Dropdown
         document.addEventListener('DOMContentLoaded', function() {
@@ -837,6 +1338,85 @@
                 isMobile = window.matchMedia("(max-width: 768px)").matches;
                 bannerSlides.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
             });
+            
+            // Footer Scripts
+            const footer = document.querySelector('.footer');
+            
+            // Add parallax effect to footer sections
+            document.querySelectorAll('.footer-section').forEach(section => {
+                section.addEventListener('mousemove', (e) => {
+                    const rect = section.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / section.offsetWidth;
+                    const y = (e.clientY - rect.top) / section.offsetHeight;
+                    
+                    const rotateY = (x - 0.5) * 8;
+                    const rotateX = (0.5 - y) * 8;
+                    
+                    section.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateY(-10px) translateZ(20px)`;
+                });
+                
+                section.addEventListener('mouseleave', () => {
+                    section.style.transform = 'translateY(0) translateZ(0)';
+                });
+            });
+            
+            // Add ripple effect to buttons
+            document.querySelectorAll('button, .socials a').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    ripple.className = 'ripple';
+                    this.appendChild(ripple);
+                    
+                    const d = Math.max(this.clientWidth, this.clientHeight);
+                    ripple.style.width = ripple.style.height = d + 'px';
+                    
+                    const rect = this.getBoundingClientRect();
+                    ripple.style.left = (e.clientX - rect.left - d/2) + 'px';
+                    ripple.style.top = (e.clientY - rect.top - d/2) + 'px';
+                    
+                    ripple.style.animation = 'ripple 0.6s linear';
+                    ripple.addEventListener('animationend', () => {
+                        ripple.remove();
+                    });
+                });
+            });
+            
+            // Add scroll animation effect to footer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.footer-section').forEach(section => {
+                section.style.animationPlayState = 'paused';
+                observer.observe(section);
+            });
+            
+            // Add ripple animation to CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    0% {
+                        transform: scale(0);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: scale(3);
+                        opacity: 0;
+                    }
+                }
+                .ripple {
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
 </body>
