@@ -289,296 +289,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Grid with Ads Banner</title>
+    <title>Product Listing</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
             background-color: #fff5f7;
-            padding: 20px;
+            padding: 10px;
         }
         
-        /* Ads Banner Styles */
-        .ads-banner {
-            width: 100%;
-            height: 200px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .banner-slide {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 1s ease;
+        .product-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-        }
-        
-        .banner-slide.active {
-            opacity: 1;
-        }
-        
-        .banner-slide:nth-child(1) { background-color: #ff69b4; }
-        .banner-slide:nth-child(2) { background-color: #4CAF50; }
-        .banner-slide:nth-child(3) { background-color: #2196F3; }
-        .banner-slide:nth-child(4) { background-color: #FF9800; }
-        .banner-slide:nth-child(5) { background-color: #9C27B0; }
-        
-        /* Product Grid Styles */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
             width: 100%;
+            justify-content: space-between;
         }
         
-        .product-card {
-            background: white;
+        .product-box {
+            width: calc(50% - 6px);
+            border: 1px solid #ffd6e0;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
         }
         
-        .product-card:hover {
+        .product-box:hover {
             transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
         }
         
         .product-image {
-            height: 180px;
-            background: #f5f5f5;
+            width: 100%;
+            height: 140px;
+            background-color: #fff5f7;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            overflow: hidden;
         }
         
         .product-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
         
-        .product-info {
-            padding: 15px;
+        .product-box:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-details {
+            padding: 12px;
         }
         
         .product-title {
             font-size: 14px;
-            margin-bottom: 8px;
+            font-weight: 600;
+            margin-bottom: 6px;
             color: #333;
+            height: 40px;
+            overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            overflow: hidden;
-            height: 40px;
         }
         
         .product-price {
+            font-size: 16px;
             font-weight: bold;
-            color: #ff69b4;
-            margin-bottom: 10px;
+            color: #ff1493;
+            margin-bottom: 12px;
         }
         
-        .view-details {
+        .view-details-btn {
             width: 100%;
             padding: 8px 0;
-            background: #ff69b4;
+            background-color: #ff69b4;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        .view-details:hover {
-            background: #ff4785;
+        .view-details-btn:hover {
+            background-color: #ff1493;
+            transform: translateY(-2px);
         }
         
-        /* Mobile Responsive Styles */
-        @media (max-width: 768px) {
-            .ads-banner {
-                height: 150px;
-                margin-bottom: 20px;
+        .view-details-btn:active {
+            transform: translateY(0);
+        }
+        
+        .view-details-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .view-details-btn:focus:not(:active)::after {
+            animation: ripple 0.6s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
             }
-            
-            .product-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-            }
-            
-            .product-card {
-                border-radius: 8px;
-            }
-            
-            .product-image {
-                height: 120px;
-                padding: 15px;
-            }
-            
-            .product-info {
-                padding: 10px;
-            }
-            
-            .product-title {
-                font-size: 12px;
-                margin-bottom: 5px;
-                height: 36px;
-            }
-            
-            .view-details {
-                font-size: 12px;
-                padding: 6px 0;
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
             }
         }
         
-        @media (max-width: 480px) {
-            .ads-banner {
-                height: 120px;
-            }
-            
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .banner-slide {
-                font-size: 18px;
-            }
+        /* Loading animation for product boxes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+        
+        .product-box {
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        /* Delay animations for each box */
+        .product-box:nth-child(1) { animation-delay: 0.1s; }
+        .product-box:nth-child(2) { animation-delay: 0.2s; }
+        .product-box:nth-child(3) { animation-delay: 0.3s; }
+        .product-box:nth-child(4) { animation-delay: 0.4s; }
+        .product-box:nth-child(5) { animation-delay: 0.5s; }
+        .product-box:nth-child(6) { animation-delay: 0.6s; }
+        .product-box:nth-child(7) { animation-delay: 0.7s; }
+        .product-box:nth-child(8) { animation-delay: 0.8s; }
+        .product-box:nth-child(9) { animation-delay: 0.9s; }
+        .product-box:nth-child(10) { animation-delay: 1.0s; }
     </style>
 </head>
 <body>
-    <!-- Ads Banner Section -->
-    <div class="ads-banner">
-        <div class="banner-slide active">Special Offer: 50% Off on Electronics</div>
-        <div class="banner-slide">Summer Sale: Buy 1 Get 1 Free</div>
-        <div class="banner-slide">New Arrivals: Shop Now!</div>
-        <div class="banner-slide">Free Shipping on Orders Over ₹999</div>
-        <div class="banner-slide">Limited Time Deals - Don't Miss Out!</div>
-    </div>
-    
-    <!-- Product Grid Section -->
-    <div class="product-grid">
-        <!-- Product 1 -->
-        <div class="product-card">
+    <div class="product-container">
+        <!-- Product Box 1 -->
+        <div class="product-box" onclick="navigateToProduct('product1')">
             <div class="product-image">
-                <img src="https://via.placeholder.com/150" alt="Product 1">
+                <img src="https://via.placeholder.com/300x200?text=Product+1" alt="Product 1">
             </div>
-            <div class="product-info">
+            <div class="product-details">
                 <div class="product-title">Wireless Bluetooth Headphones with Noise Cancellation</div>
-                <div class="product-price">₹1,299</div>
-                <button class="add-to-cart">view details</button>
+                <div class="product-price">৳3,499</div>
+                <button class="view-details-btn">View Details</button>
             </div>
         </div>
         
-        <!-- Product 2 -->
-        <div class="product-card">
+        <!-- Product Box 2 -->
+        <div class="product-box" onclick="navigateToProduct('product2')">
             <div class="product-image">
-                <img src="https://via.placeholder.com/150" alt="Product 2">
+                <img src="https://via.placeholder.com/300x200?text=Product+2" alt="Product 2">
             </div>
-            <div class="product-info">
-                <div class="product-title">Smart Watch Fitness Tracker with Heart Rate Monitor</div>
-                <div class="product-price">₹2,499</div>
-                <button class="add-to-cart">view details</button>
+            <div class="product-details">
+                <div class="product-title">Smart Fitness Band with Heart Rate Monitor</div>
+                <div class="product-price">৳1,799</div>
+                <button class="view-details-btn">View Details</button>
             </div>
         </div>
         
-        <!-- Product 3 -->
-        <div class="product-card">
+        <!-- Product Box 3 -->
+        <div class="product-box" onclick="navigateToProduct('product3')">
             <div class="product-image">
-                <img src="https://via.placeholder.com/150" alt="Product 3">
+                <img src="https://via.placeholder.com/300x200?text=Product+3" alt="Product 3">
             </div>
-            <div class="product-info">
-                <div class="product-title">Running Shoes for Men - Cushioned Sole</div>
-                <div class="product-price">₹1,799</div>
-                <button class="add-to-cart">view details</button>
+            <div class="product-details">
+                <div class="product-title">Portable Bluetooth Speaker - 20W Output</div>
+                <div class="product-price">৳2,299</div>
+                <button class="view-details-btn">View Details</button>
             </div>
         </div>
         
-        <!-- Product 4 -->
-        <div class="product-card">
+        <!-- Product Box 4 -->
+        <div class="product-box" onclick="navigateToProduct('product4')">
             <div class="product-image">
-                <img src="https://via.placeholder.com/150" alt="Product 4">
+                <img src="https://via.placeholder.com/300x200?text=Product+4" alt="Product 4">
             </div>
-            <div class="product-info">
-                <div class="product-title">Wireless Fast Mobile Charger 10W</div>
-                <div class="product-price">₹899</div>
-                <button class="add-to-cart">view details</button>
+            <div class="product-details">
+                <div class="product-title">Ultra HD 4K Action Camera with Waterproof Case</div>
+                <div class="product-price">৳6,999</div>
+                <button class="view-details-btn">View Details</button>
             </div>
         </div>
         
-        <!-- Product 5 -->
-        <div class="product-card">
+        <!-- Product Box 5 -->
+        <div class="product-box" onclick="navigateToProduct('product5')">
             <div class="product-image">
-                <img src="https://via.placeholder.com/150" alt="Product 5">
+                <img src="https://via.placeholder.com/300x200?text=Product+5" alt="Product 5">
             </div>
-            <div class="product-info">
-                <div class="product-title">Backpack for College Students - Waterproof</div>
-                <div class="product-price">₹1,099</div>
-                <button class="add-to-cart">view details</button>
+            <div class="product-details">
+                <div class="product-title">Ergonomic Wireless Mouse with Silent Click</div>
+                <div class="product-price">৳899</div>
+                <button class="view-details-btn">View Details</button>
             </div>
         </div>
         
-        <!-- Product 6 -->
-        <div class="product-card">
+        <!-- Product Box 6 -->
+        <div class="product-box" onclick="navigateToProduct('product6')">
             <div class="product-image">
-                <img src="https://via.placeholder.com/150" alt="Product 6">
+                <img src="https://via.placeholder.com/300x200?text=Product+6" alt="Product 6">
             </div>
-            <div class="product-info">
-                <div class="product-title">Digital Camera 20MP with 4K Video</div>
-                <div class="product-price">₹5,999</div>
-                <button class="add-to-cart">view details</button>
+            <div class="product-details">
+                <div class="product-title">Multi-Port USB Charging Station - 6 Devices</div>
+                <div class="product-price">৳1,499</div>
+                <button class="view-details-btn">View Details</button>
+            </div>
+        </div>
+        
+        <!-- Product Box 7 -->
+        <div class="product-box" onclick="navigateToProduct('product7')">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x200?text=Product+7" alt="Product 7">
+            </div>
+            <div class="product-details">
+                <div class="product-title">Adjustable Phone Stand with Wireless Charger</div>
+                <div class="product-price">৳1,299</div>
+                <button class="view-details-btn">View Details</button>
+            </div>
+        </div>
+        
+        <!-- Product Box 8 -->
+        <div class="product-box" onclick="navigateToProduct('product8')">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x200?text=Product+8" alt="Product 8">
+            </div>
+            <div class="product-details">
+                <div class="product-title">Mechanical Gaming Keyboard with RGB Lighting</div>
+                <div class="product-price">৳3,999</div>
+                <button class="view-details-btn">View Details</button>
+            </div>
+        </div>
+        
+        <!-- Product Box 9 -->
+        <div class="product-box" onclick="navigateToProduct('product9')">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x200?text=Product+9" alt="Product 9">
+            </div>
+            <div class="product-details">
+                <div class="product-title">Fast Wireless Charger Pad - 15W Output</div>
+                <div class="product-price">৳1,099</div>
+                <button class="view-details-btn">View Details</button>
+            </div>
+        </div>
+        
+        <!-- Product Box 10 -->
+        <div class="product-box" onclick="navigateToProduct('product10')">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x200?text=Product+10" alt="Product 10">
+            </div>
+            <div class="product-details">
+                <div class="product-title">Noise Cancelling Earbuds with 30hr Battery</div>
+                <div class="product-price">৳2,899</div>
+                <button class="view-details-btn">View Details</button>
             </div>
         </div>
     </div>
-    
+
     <script>
-        // Automatic banner rotation
-        document.addEventListener('DOMContentLoaded', function() {
-            // Banner rotation functionality
-            const bannerSlides = document.querySelectorAll('.banner-slide');
-            let currentSlide = 0;
+        // Function to navigate to product details page
+        function navigateToProduct(productId) {
+            // Animation before navigation
+            const productBox = event.currentTarget;
+            productBox.style.transform = 'scale(0.95)';
+            productBox.style.opacity = '0.8';
             
-            function rotateBanner() {
-                // Hide all slides
-                bannerSlides.forEach(slide => {
-                    slide.classList.remove('active');
-                });
+            setTimeout(() => {
+                // In a real implementation, you would redirect to the product page
+                // window.location.href = `/product-details.html?id=${productId}`;
                 
-                // Show current slide
-                bannerSlides[currentSlide].classList.add('active');
+                // For demo purposes, we'll just show an alert
+                alert(`Navigating to product details for ${productId}`);
                 
-                // Move to next slide
-                currentSlide = (currentSlide + 1) % bannerSlides.length;
-            }
-            
-            // Rotate every 5 seconds
-            setInterval(rotateBanner, 5000);
-            
-            // view details functionality
-            const view-detailsButtons = document.querySelectorAll('.view-details');
-            view-detailsButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const productTitle = this.parentElement.querySelector('.product-title').textContent;
-                    alert(`${productTitle} view details!`);
-                });
+                // Reset animation
+                productBox.style.transform = '';
+                productBox.style.opacity = '';
+            }, 200);
+        }
+        
+        // Add click event to all buttons (alternative to onclick on div)
+        document.querySelectorAll('.view-details-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent triggering the div click
+                const productBox = this.closest('.product-box');
+                navigateToProduct(productBox.getAttribute('onclick').match(/'([^']+)'/)[1]);
             });
         });
     </script>
