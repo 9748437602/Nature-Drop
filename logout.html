@@ -20,73 +20,6 @@
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
-        }
-        
-        /* Loading Overlay */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(8px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        
-        .loading-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .loader {
-            width: 80px;
-            height: 80px;
-            position: relative;
-            margin-bottom: 20px;
-        }
-        
-        .loader-inner {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 5px solid transparent;
-            border-top-color: #11998e;
-            border-radius: 50%;
-            animation: spin 1.5s linear infinite;
-        }
-        
-        .loader-inner:nth-child(2) {
-            border-top-color: #38ef7d;
-            animation: spin 1.5s linear infinite reverse;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .loading-text {
-            font-size: 24px;
-            font-weight: 600;
-            color: #11998e;
-            margin-top: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .loading-subtext {
-            font-size: 16px;
-            color: #555;
-            margin-top: 10px;
-            max-width: 80%;
-            text-align: center;
         }
         
         .container {
@@ -827,22 +760,12 @@
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader">
-            <div class="loader-inner"></div>
-            <div class="loader-inner"></div>
-        </div>
-        <div class="loading-text">Nature Drop</div>
-        <div class="loading-subtext">Loading our premium collection...</div>
-    </div>
-    
     <header>
         <div class="top-bar">
             <div class="logo-container">
                 <div class="round-logo">
-                    <!-- Nature Drop Logo -->
-                    <img src="https://i.ibb.co/7GfQhQx/nature-drop-logo.png" alt="Nature Drop Logo">
+                    <!-- Round PNG Logo -->
+                    <img src="images/nature drop.png" alt="image" style="height: 40px;" />
                 </div>
                 <div class="logo-text">Nature Drop</div>
             </div>
@@ -902,9 +825,9 @@
                     <span>Help Center</span>
                 </li>
                 <div class="divider"></div>
-                <li onclick="location.href='login.html'">
+                <li onclick="location.href='logout.html'">
                     <i class="fas fa-sign out-alt"></i>
-                    <span>Login</span>
+                    <span>Logout</span>
                 </li>
             </ul>
         </div>
@@ -1552,14 +1475,6 @@
     </footer>
 
     <script>
-        // Loading overlay functionality
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        
-        // Simulate page loading
-        setTimeout(() => {
-            loadingOverlay.classList.add('hidden');
-        }, 3000);
-        
         // Toggle profile dropdown
         const menuToggle = document.getElementById('menuToggle');
         const profileDropdown = document.getElementById('profileDropdown');
