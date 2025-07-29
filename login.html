@@ -376,6 +376,28 @@
             font-size: 14px;
         }
         
+        .api-status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .api-status.success {
+            background-color: #e6ffe6;
+            color: #11998e;
+            border: 1px solid #a3e9a3;
+            display: block;
+        }
+        
+        .api-status.error {
+            background-color: #ffe6e6;
+            color: #ff4757;
+            border: 1px solid #ffb3b3;
+            display: block;
+        }
+        
         /* Footer */
         footer {
             text-align: center;
@@ -488,6 +510,8 @@
                     <a href="#" class="forgot-password">Forgot Password?</a>
                 </div>
                 
+                <div class="api-status" id="loginApiStatus"></div>
+                
                 <button class="action-btn" id="loginBtn">Login</button>
                 
                 <div class="divider">or</div>
@@ -548,6 +572,8 @@
                     <div class="error-message" id="confirmPasswordError"></div>
                 </div>
                 
+                <div class="api-status" id="signupApiStatus"></div>
+                
                 <button class="action-btn" id="signupBtn">Create Account</button>
                 
                 <div class="divider">or</div>
@@ -560,10 +586,75 @@
     </div>
     
     <footer>
-        <p>© 2023 NatureDrop.in . All rights reserved.</p>
+        <p>© 2023 Nature Drop by ShopEasy. All rights reserved.</p>
     </footer>
     
     <script>
+        // API Endpoints (mock)
+        const API_ENDPOINTS = {
+            SEND_OTP: 'https://api.nature-drop.com/auth/send-otp',
+            VERIFY_OTP: 'https://api.nature-drop.com/auth/verify-otp',
+            LOGIN: 'https://api.nature-drop.com/auth/login',
+            SIGNUP: 'https://api.nature-drop.com/auth/signup'
+        };
+        
+        // Mock API functions
+        function mockApiCall(url, data) {
+            return new Promise((resolve, reject) => {
+                // Simulate API delay
+                setTimeout(() => {
+                    if (url === API_ENDPOINTS.SEND_OTP) {
+                        // Simulate successful OTP send
+                        resolve({
+                            status: 'success',
+                            message: 'OTP sent successfully',
+                            timestamp: new Date().toISOString()
+                        });
+                    } 
+                    else if (url === API_ENDPOINTS.VERIFY_OTP) {
+                        // Simulate OTP verification
+                        if (data.otp === '1234') {
+                            resolve({
+                                status: 'success',
+                                message: 'OTP verified successfully'
+                            });
+                        } else {
+                            reject({
+                                status: 'error',
+                                message: 'Invalid OTP'
+                            });
+                        }
+                    }
+                    else if (url === API_ENDPOINTS.LOGIN) {
+                        // Simulate login
+                        resolve({
+                            status: 'success',
+                            message: 'Login successful',
+                            user: {
+                                id: 'user_12345',
+                                name: 'Nature Drop User',
+                                mobile: data.mobile,
+                                token: 'auth_token_123456789'
+                            }
+                        });
+                    }
+                    else if (url === API_ENDPOINTS.SIGNUP) {
+                        // Simulate signup
+                        resolve({
+                            status: 'success',
+                            message: 'Account created successfully',
+                            user: {
+                                id: 'user_12345',
+                                name: 'Nature Drop User',
+                                mobile: data.mobile,
+                                token: 'auth_token_123456789'
+                            }
+                        });
+                    }
+                }, 1500);
+            });
+        }
+        
         // DOM Elements
         const tabs = document.querySelectorAll('.tab');
         const loginForm = document.getElementById('loginForm');
@@ -576,6 +667,8 @@
         const signupOtpContainer = document.getElementById('signupOtpContainer');
         const loginBtn = document.getElementById('loginBtn');
         const signupBtn = document.getElementById('signupBtn');
+        const loginApiStatus = document.getElementById('loginApiStatus');
+        const signupApiStatus = document.getElementById('signupApiStatus');
         
         // OTP Resend elements
         const loginResendOtp = document.getElementById('loginResendOtp');
@@ -615,12 +708,14 @@
                     useOtpBtn.textContent = 'Use OTP instead';
                     loginPassword.parentElement.parentElement.style.display = 'block';
                     clearInterval(loginTimerInterval);
+                    loginApiStatus.style.display = 'none';
                 } else {
                     signupForm.classList.add('active');
                     loginForm.classList.remove('active');
                     // Reset OTP container on switch
                     signupOtpContainer.classList.remove('active');
                     clearInterval(signupTimerInterval);
+                    signupApiStatus.style.display = 'none';
                 }
             });
         });
@@ -672,6 +767,9 @@
                 return;
             }
             
+            // Call API to send OTP
+            sendOtpApi(mobile, 'login');
+            
             loginOtpContainer.classList.toggle('active');
             if (loginOtpContainer.classList.contains('active')) {
                 useOtpBtn.textContent = 'Use Password instead';
@@ -696,35 +794,77 @@
             
             hideError('signupMobileError');
             
-            // Simulate sending OTP
-            sendOtpBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending OTP...';
-            sendOtpBtn.disabled = true;
-            
-            setTimeout(() => {
-                sendOtpBtn.innerHTML = 'OTP Sent!';
-                sendOtpBtn.style.background = '#e6ffe6';
-                sendOtpBtn.style.color = '#11998e';
-                sendOtpBtn.style.borderColor = '#a3e9a3';
-                
-                // Show OTP container
-                signupOtpContainer.classList.add('active');
-                
-                // Focus first OTP input
-                document.querySelector('#signupOtpContainer .otp-input').focus();
-                
-                // Start OTP timer for signup
-                startSignupTimer();
-                
-                // Reset after 5 seconds
-                setTimeout(() => {
-                    sendOtpBtn.innerHTML = 'Send OTP';
-                    sendOtpBtn.style.background = '#e6f7ff';
-                    sendOtpBtn.style.color = '#11998e';
-                    sendOtpBtn.style.borderColor = '#b3e0ff';
-                    sendOtpBtn.disabled = false;
-                }, 5000);
-            }, 1500);
+            // Call API to send OTP
+            sendOtpApi(mobile, 'signup');
         });
+        
+        // API: Send OTP
+        function sendOtpApi(mobile, context) {
+            // Show loading state
+            if (context === 'signup') {
+                sendOtpBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending OTP...';
+                sendOtpBtn.disabled = true;
+            } else {
+                useOtpBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending OTP...';
+                useOtpBtn.disabled = true;
+            }
+            
+            // Call mock API
+            mockApiCall(API_ENDPOINTS.SEND_OTP, { mobile })
+                .then(response => {
+                    // Show OTP container
+                    if (context === 'signup') {
+                        signupOtpContainer.classList.add('active');
+                        document.querySelector('#signupOtpContainer .otp-input').focus();
+                        startSignupTimer();
+                        
+                        sendOtpBtn.innerHTML = 'OTP Sent!';
+                        sendOtpBtn.style.background = '#e6ffe6';
+                        sendOtpBtn.style.color = '#11998e';
+                        sendOtpBtn.style.borderColor = '#a3e9a3';
+                        
+                        setTimeout(() => {
+                            sendOtpBtn.innerHTML = 'Send OTP';
+                            sendOtpBtn.style.background = '#e6f7ff';
+                            sendOtpBtn.style.color = '#11998e';
+                            sendOtpBtn.style.borderColor = '#b3e0ff';
+                            sendOtpBtn.disabled = false;
+                        }, 3000);
+                    } else {
+                        loginOtpContainer.classList.add('active');
+                        document.querySelector('#loginOtpContainer .otp-input').focus();
+                        startLoginTimer();
+                        
+                        useOtpBtn.innerHTML = 'OTP Sent!';
+                        useOtpBtn.style.background = '#e6ffe6';
+                        useOtpBtn.style.color = '#11998e';
+                        useOtpBtn.style.borderColor = '#a3e9a3';
+                        
+                        setTimeout(() => {
+                            useOtpBtn.innerHTML = 'Use OTP instead';
+                            useOtpBtn.style.background = '';
+                            useOtpBtn.style.color = '';
+                            useOtpBtn.style.borderColor = '';
+                            useOtpBtn.disabled = false;
+                        }, 3000);
+                    }
+                    
+                    // Show success status
+                    showApiStatus(context, 'OTP sent successfully!', 'success');
+                })
+                .catch(error => {
+                    // Show error status
+                    showApiStatus(context, 'Failed to send OTP. Please try again.', 'error');
+                    
+                    if (context === 'signup') {
+                        sendOtpBtn.innerHTML = 'Send OTP';
+                        sendOtpBtn.disabled = false;
+                    } else {
+                        useOtpBtn.innerHTML = 'Use OTP instead';
+                        useOtpBtn.disabled = false;
+                    }
+                });
+        }
         
         // Start OTP timer for login form
         function startLoginTimer() {
@@ -766,74 +906,28 @@
         
         // Resend OTP for login
         loginResendOtp.addEventListener('click', () => {
-            // Simulate resending OTP
-            loginResendOtp.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resending...';
-            loginResendOtp.disabled = true;
+            const mobile = document.getElementById('loginMobile').value;
+            if (!mobile || mobile.length !== 10 || isNaN(mobile)) {
+                showError('loginMobileError', 'Please enter a valid mobile number');
+                return;
+            }
             
-            setTimeout(() => {
-                // Restart the timer
-                startLoginTimer();
-                
-                // Show success message
-                const notification = document.createElement('div');
-                notification.textContent = 'OTP has been resent to your mobile';
-                notification.style.position = 'fixed';
-                notification.style.bottom = '20px';
-                notification.style.left = '50%';
-                notification.style.transform = 'translateX(-50%)';
-                notification.style.background = '#11998e';
-                notification.style.color = 'white';
-                notification.style.padding = '10px 20px';
-                notification.style.borderRadius = '5px';
-                notification.style.zIndex = '1000';
-                notification.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.remove();
-                }, 3000);
-                
-                // Reset button
-                setTimeout(() => {
-                    loginResendOtp.innerHTML = 'Resend OTP';
-                }, 1500);
-            }, 1000);
+            // Call API to resend OTP
+            sendOtpApi(mobile, 'login');
+            startLoginTimer();
         });
         
         // Resend OTP for signup
         signupResendOtp.addEventListener('click', () => {
-            // Simulate resending OTP
-            signupResendOtp.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resending...';
-            signupResendOtp.disabled = true;
+            const mobile = document.getElementById('signupMobile').value;
+            if (!mobile || mobile.length !== 10 || isNaN(mobile)) {
+                showError('signupMobileError', 'Please enter a valid mobile number');
+                return;
+            }
             
-            setTimeout(() => {
-                // Restart the timer
-                startSignupTimer();
-                
-                // Show success message
-                const notification = document.createElement('div');
-                notification.textContent = 'OTP has been resent to your mobile';
-                notification.style.position = 'fixed';
-                notification.style.bottom = '20px';
-                notification.style.left = '50%';
-                notification.style.transform = 'translateX(-50%)';
-                notification.style.background = '#11998e';
-                notification.style.color = 'white';
-                notification.style.padding = '10px 20px';
-                notification.style.borderRadius = '5px';
-                notification.style.zIndex = '1000';
-                notification.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.remove();
-                }, 3000);
-                
-                // Reset button
-                setTimeout(() => {
-                    signupResendOtp.innerHTML = 'Resend OTP';
-                }, 1500);
-            }, 1000);
+            // Call API to resend OTP
+            sendOtpApi(mobile, 'signup');
+            startSignupTimer();
         });
         
         // OTP input navigation for both forms
@@ -876,9 +970,12 @@
                 hideError('loginMobileError');
             }
             
+            // Prepare API call data
+            let apiData = { mobile };
+            
             // Validate password/OTP
             if (useOtp) {
-                // Check OTP
+                // Get OTP
                 let otp = '';
                 const otpInputs = document.querySelectorAll('#loginOtpContainer .otp-input');
                 otpInputs.forEach(input => otp += input.value);
@@ -889,6 +986,9 @@
                 } else {
                     hideError('loginPasswordError');
                 }
+                
+                apiData.otp = otp;
+                apiData.method = 'otp';
             } else {
                 // Validate password
                 if (!password || password.length < 6) {
@@ -897,17 +997,37 @@
                 } else {
                     hideError('loginPasswordError');
                 }
+                
+                apiData.password = password;
+                apiData.method = 'password';
             }
             
-            // Simulate login
+            // Call login API
             loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
             loginBtn.disabled = true;
             
-            setTimeout(() => {
-                alert('Login successful! Welcome to Nature Drop.');
-                loginBtn.innerHTML = 'Login';
-                loginBtn.disabled = false;
-            }, 1500);
+            mockApiCall(API_ENDPOINTS.LOGIN, apiData)
+                .then(response => {
+                    loginApiStatus.textContent = response.message;
+                    loginApiStatus.className = 'api-status success';
+                    loginApiStatus.style.display = 'block';
+                    
+                    // Redirect to dashboard after successful login
+                    setTimeout(() => {
+                        alert('Login successful! Welcome to Nature Drop.');
+                        // In a real app, you would redirect to the dashboard
+                        // window.location.href = '/dashboard';
+                    }, 1000);
+                })
+                .catch(error => {
+                    loginApiStatus.textContent = error.message || 'Login failed. Please try again.';
+                    loginApiStatus.className = 'api-status error';
+                    loginApiStatus.style.display = 'block';
+                })
+                .finally(() => {
+                    loginBtn.innerHTML = 'Login';
+                    loginBtn.disabled = false;
+                });
         });
         
         // Signup functionality
@@ -957,28 +1077,45 @@
                 hideError('confirmPasswordError');
             }
             
-            // Simulate signup
+            // Prepare API call data
+            const apiData = {
+                mobile,
+                password,
+                otp
+            };
+            
+            // Call signup API
             signupBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
             signupBtn.disabled = true;
             
-            setTimeout(() => {
-                alert('Account created successfully! Welcome to Nature Drop.');
-                signupBtn.innerHTML = 'Create Account';
-                signupBtn.disabled = false;
-                
-                // Switch to login tab
-                tabs.forEach(t => t.classList.remove('active'));
-                document.querySelector('.tab[data-tab="login"]').classList.add('active');
-                signupForm.classList.remove('active');
-                loginForm.classList.add('active');
-                
-                // Reset form
-                document.getElementById('signupMobile').value = '';
-                document.getElementById('signupPassword').value = '';
-                document.getElementById('confirmPassword').value = '';
-                otpInputs.forEach(input => input.value = '');
-                signupOtpContainer.classList.remove('active');
-            }, 1500);
+            mockApiCall(API_ENDPOINTS.SIGNUP, apiData)
+                .then(response => {
+                    signupApiStatus.textContent = response.message;
+                    signupApiStatus.className = 'api-status success';
+                    signupApiStatus.style.display = 'block';
+                    
+                    // Redirect to dashboard after successful signup
+                    setTimeout(() => {
+                        alert('Account created successfully! Welcome to Nature Drop.');
+                        // In a real app, you would redirect to the dashboard
+                        // window.location.href = '/dashboard';
+                        
+                        // Switch to login tab
+                        tabs.forEach(t => t.classList.remove('active'));
+                        document.querySelector('.tab[data-tab="login"]').classList.add('active');
+                        signupForm.classList.remove('active');
+                        loginForm.classList.add('active');
+                    }, 1500);
+                })
+                .catch(error => {
+                    signupApiStatus.textContent = error.message || 'Signup failed. Please try again.';
+                    signupApiStatus.className = 'api-status error';
+                    signupApiStatus.style.display = 'block';
+                })
+                .finally(() => {
+                    signupBtn.innerHTML = 'Create Account';
+                    signupBtn.disabled = false;
+                });
         });
         
         // Helper functions
@@ -991,6 +1128,18 @@
         function hideError(elementId) {
             const errorElement = document.getElementById(elementId);
             errorElement.style.display = 'none';
+        }
+        
+        function showApiStatus(context, message, type) {
+            const element = context === 'login' ? loginApiStatus : signupApiStatus;
+            element.textContent = message;
+            element.className = `api-status ${type}`;
+            element.style.display = 'block';
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 3000);
         }
         
         // Mobile number validation
