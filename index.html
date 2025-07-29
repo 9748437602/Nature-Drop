@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-commerce Website</title>
+    <title>NatureDrop - Premium Products</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Global Styles */
         * {
             margin: 0;
             padding: 0;
@@ -18,6 +19,7 @@
             min-height: 100vh;
         }
         
+        /* Header Styles */
         header {
             background-color: white;
             padding: 15px 5%;
@@ -25,7 +27,8 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            position: relative;
+            position: sticky;
+            top: 0;
             z-index: 1000;
         }
         
@@ -158,115 +161,11 @@
         .dropdown-menu a:last-child {
             border-bottom: none;
         }
-    </style>
-</head>
-<body>
-    <header>
-        <!-- Left Side - Logo -->
-        <div class="logo">
-            <img src="images/nature drop.png" alt="Nature drop Logo">
-        </div>
         
-        <!-- Middle - Search Bar -->
-        <div class="search-container">
-            <div class="search-bar">
-                <input type="text" placeholder="Search for products...">
-                <button><i class="fas fa-search"></i></button>
-            </div>
-        </div>
-        
-        <!-- Right Side - Profile Icon with Dropdown -->
-        <div class="profile-section">
-            <div class="profile-icon" id="profileIcon">
-                <i class="fas fa-user-circle"></i>
-            </div>
-            
-            <div class="dropdown-menu" id="dropdownMenu">
-                <a href="my profile">
-                    <i class="fas fa-user"></i>
-                    My Profile
-                </a>
-                <a href="my orders">
-                    <i class="fas fa-box-open"></i>
-                    My Orders
-                </a>
-                <a href="#">
-                    <i class="fas fa-shopping-cart"></i>
-                    My Cart
-                </a>
-                <a href="#">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
-                </a>
-            </div>
-        </div>
-    </header>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const profileIcon = document.getElementById('profileIcon');
-            const dropdownMenu = document.getElementById('dropdownMenu');
-            
-            // Toggle dropdown when clicking profile icon
-            profileIcon.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent immediate closing
-                dropdownMenu.classList.toggle('show');
-            });
-            
-            // Close dropdown when clicking anywhere else
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.profile-section')) {
-                    dropdownMenu.classList.remove('show');
-                }
-            });
-            
-            // Close dropdown when clicking on a menu item
-            const menuItems = dropdownMenu.querySelectorAll('a');
-            menuItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    dropdownMenu.classList.remove('show');
-                });
-            });
-            
-            // Prevent dropdown from closing when clicking inside it
-            dropdownMenu.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-        });
-    </script>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto-Changing News Ticker</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        
+        /* News Ticker Styles */
         .news-slider {
             background-color: pink;
-            padding: 1px;
+            padding: 10px 0;
             text-align: center;
             border-bottom: 1px solid #eee;
         }
@@ -274,7 +173,7 @@
         .news-item {
             display: none;
             font-size: 1.1em;
-            padding: 1px 0;
+            padding: 5px 0;
         }
         
         .news-item.active {
@@ -282,78 +181,7 @@
             animation: fadeIn 0.5s;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
-</head>
-<body>
-    <!-- Auto-changing News Ticker -->
-    <div class="news-slider">
-        <div class="news-item active">
-            <strong>News today
-        </div>
-        <div class="news-item">
-            <strong>News 2:</strong> arif developers
-        </div>
-        <div class="news-item">
-            <strong>News 3:</strong> website and app dev
-        </div>
-        <div class="news-item">
-            <strong>News 4:</strong> real app
-        </div>
-    </div>
-
-    <script>
-        // Auto-changing news (every 3 seconds)
-        const newsItems = document.querySelectorAll('.news-item');
-        let currentNewsIndex = 0;
-        
-        function rotateNews() {
-            // Hide current item
-            newsItems[currentNewsIndex].classList.remove('active');
-            
-            // Move to next item
-            currentNewsIndex = (currentNewsIndex + 1) % newsItems.length;
-            
-            // Show next item
-            newsItems[currentNewsIndex].classList.add('active');
-        }
-        
-        // Start rotation every 3 seconds
-        setInterval(rotateNews, 3000);
-    </script>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Banner with Images</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        
+        /* Banner Styles */
         .banner-box {
             width: 100%;
             max-width: 1920px;
@@ -361,20 +189,16 @@
             overflow: hidden;
             position: relative;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
         }
         
         .banner-container {
             width: 100%;
-            height: 600px;
+            height: 500px;
         }
         
         @media (max-width: 768px) {
             .banner-container {
-                height: 300px;
-            }
-            .banner-box {
-                border-radius: 4px;
+                height: 250px;
             }
         }
         
@@ -464,213 +288,7 @@
             }
         }
         
-        .content {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 20px auto;
-        }
-    </style>
-</head>
-<body>
-    <div class="banner-box">
-        <div class="banner-container">
-            <div class="banner-slides">
-                <!-- Slide 1 - Nature -->
-                <div class="banner-slide">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" 
-                         alt="Nature Landscape"
-                         srcset="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=300&q=80 600w,
-                                 https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&h=600&q=80 1920w"
-                         sizes="100vw">
-                </div>
-                
-                <!-- Slide 2 - City -->
-                <div class="banner-slide">
-                    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df" 
-                         alt="City Skyline"
-                         srcset="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=300&q=80 600w,
-                                 https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&h=600&q=80 1920w"
-                         sizes="100vw">
-                </div>
-                
-                <!-- Slide 3 - Beach -->
-                <div class="banner-slide">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" 
-                         alt="Beach View"
-                         srcset="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=300&q=80 600w,
-                                 https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&h=600&q=80 1920w"
-                         sizes="100vw">
-                </div>
-                
-                <!-- Slide 4 - Mountains -->
-                <div class="banner-slide">
-                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b" 
-                         alt="Mountain Range"
-                         srcset="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=300&q=80 600w,
-                                 https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&h=600&q=80 1920w"
-                         sizes="100vw">
-                </div>
-            </div>
-
-            <div class="banner-nav">
-                <div class="nav-arrow prev">&#10094;</div>
-                <div class="nav-arrow next">&#10095;</div>
-            </div>
-
-            <div class="banner-dots">
-                <span class="dot active" data-index="0"></span>
-                <span class="dot" data-index="1"></span>
-                <span class="dot" data-index="2"></span>
-                <span class="dot" data-index="3"></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="content">
-        <h2>Website Content</h2>
-        <p>Your main website content goes here...</p>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelector('.banner-slides');
-            const slideItems = document.querySelectorAll('.banner-slide');
-            const dots = document.querySelectorAll('.dot');
-            const prevBtn = document.querySelector('.prev');
-            const nextBtn = document.querySelector('.next');
-            
-            let currentIndex = 0;
-            const totalSlides = slideItems.length;
-            let autoScrollInterval;
-            const slideInterval = 8000;
-            let isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-            function goToSlide(index) {
-                if (index < 0) index = totalSlides - 1;
-                if (index >= totalSlides) index = 0;
-                
-                slides.style.transform = `translateX(-${index * 100}%)`;
-                currentIndex = index;
-                
-                dots.forEach(dot => dot.classList.remove('active'));
-                dots[index].classList.add('active');
-            }
-
-            function startAutoScroll() {
-                autoScrollInterval = setInterval(() => {
-                    goToSlide(currentIndex + 1);
-                }, slideInterval);
-            }
-
-            startAutoScroll();
-
-            if (!isMobile) {
-                document.querySelector('.banner-container').addEventListener('mouseenter', () => {
-                    clearInterval(autoScrollInterval);
-                });
-
-                document.querySelector('.banner-container').addEventListener('mouseleave', startAutoScroll);
-            }
-
-            nextBtn.addEventListener('click', () => {
-                goToSlide(currentIndex + 1);
-                resetAutoScroll();
-            });
-
-            prevBtn.addEventListener('click', () => {
-                goToSlide(currentIndex - 1);
-                resetAutoScroll();
-            });
-
-            dots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    const slideIndex = parseInt(this.getAttribute('data-index'));
-                    goToSlide(slideIndex);
-                    resetAutoScroll();
-                });
-            });
-
-            if (isMobile) {
-                let touchStartX = 0;
-                let touchEndX = 0;
-
-                slides.addEventListener('touchstart', (e) => {
-                    touchStartX = e.changedTouches[0].screenX;
-                    clearInterval(autoScrollInterval);
-                }, {passive: true});
-
-                slides.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    handleSwipe();
-                    resetAutoScroll();
-                }, {passive: true});
-
-                function handleSwipe() {
-                    const threshold = 50;
-                    if (touchEndX < touchStartX - threshold) {
-                        goToSlide(currentIndex + 1);
-                    } else if (touchEndX > touchStartX + threshold) {
-                        goToSlide(currentIndex - 1);
-                    }
-                }
-            }
-
-            function resetAutoScroll() {
-                clearInterval(autoScrollInterval);
-                startAutoScroll();
-            }
-
-            window.addEventListener('resize', function() {
-                isMobile = window.matchMedia("(max-width: 768px)").matches;
-                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-            });
-        });
-    </script>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Product Grid</title>
-    <style>
+        /* Product Grid Styles */
         :root {
             --primary-color: #ff4081;
             --primary-hover: #e91e63;
@@ -682,31 +300,37 @@
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .main-content {
+            padding: 30px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
-
-        body {
-            background-color: var(--bg-light);
-            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
-            line-height: 1.6;
-            padding: 20px;
+        
+        .section-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #ff69b4;
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            .product-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
         }
 
         .product-card {
@@ -744,7 +368,7 @@
         }
 
         .product-image-container {
-            height: 160px;
+            height: 200px;
             position: relative;
             overflow: hidden;
         }
@@ -768,13 +392,14 @@
         }
 
         .product-title {
-            font-size: 14px;
+            font-size: 16px;
             color: var(--text-dark);
             font-weight: 600;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            min-height: 40px;
         }
 
         .price-container {
@@ -786,11 +411,11 @@
         .current-price {
             font-weight: bold;
             color: var(--primary-color);
-            font-size: 16px;
+            font-size: 18px;
         }
 
         .original-price {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text-light);
             text-decoration: line-through;
         }
@@ -856,206 +481,352 @@
     </style>
 </head>
 <body>
-    <div class="product-grid">
-        <!-- Product 1 -->
-        <div class="product-card">
-            <div class="badge-container">
-                <span class="discount-badge">25% OFF</span>
-            </div>
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/300x200?text=Product+1" alt="Product 1" class="product-image">
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">Premium Wireless Headphones with Noise Cancellation</h3>
-                <div class="price-container">
-                    <span class="current-price">$149.99</span>
-                    <span class="original-price">$199.99</span>
-                </div>
-                <button class="view-details" onclick="window.location.href='product-details.html?id=1'">
-                    View Details
-                </button>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="images/nature drop.png" alt="Nature drop Logo">
+        </div>
+        
+        <div class="search-container">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products...">
+                <button><i class="fas fa-search"></i></button>
             </div>
         </div>
-
-        <!-- Product 2 -->
-        <div class="product-card">
-            <div class="badge-container">
-                <span class="discount-badge">15% OFF</span>
+        
+        <div class="profile-section">
+            <div class="profile-icon" id="profileIcon">
+                <i class="fas fa-user-circle"></i>
             </div>
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/300x200?text=Product+2" alt="Product 2" class="product-image">
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">Ultra HD Smart TV with Voice Control</h3>
-                <div class="price-container">
-                    <span class="current-price">$849.99</span>
-                    <span class="original-price">$999.99</span>
-                </div>
-                <button class="view-details" onclick="window.location.href='product-details.html?id=2'">
-                    View Details
-                </button>
-            </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-card">
-            <div class="badge-container">
-                <span class="discount-badge">30% OFF</span>
-            </div>
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/300x200?text=Product+3" alt="Product 3" class="product-image">
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">Professional DSLR Camera Kit</h3>
-                <div class="price-container">
-                    <span class="current-price">$699.99</span>
-                    <span class="original-price">$999.99</span>
-                </div>
-                <button class="view-details" onclick="window.location.href='product-details.html?id=3'">
-                    View Details
-                </button>
+            
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="my profile">
+                    <i class="fas fa-user"></i>
+                    My Profile
+                </a>
+                <a href="my orders">
+                    <i class="fas fa-box-open"></i>
+                    My Orders
+                </a>
+                <a href="#">
+                    <i class="fas fa-shopping-cart"></i>
+                    My Cart
+                </a>
+                <a href="#">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
             </div>
         </div>
-
-        <!-- Product 4 -->
-        <div class="product-card">
-            <div class="badge-container">
-                <span class="discount-badge">10% OFF</span>
-            </div>
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/300x200?text=Product+4" alt="Product 4" class="product-image">
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">Smart Fitness Tracker with Heart Rate Monitor</h3>
-                <div class="price-container">
-                    <span class="current-price">$89.99</span>
-                    <span class="original-price">$99.99</span>
-                </div>
-                <button class="view-details" onclick="window.location.href='product-details.html?id=4'">
-                    View Details
-                </button>
-            </div>
+    </header>
+    
+    <!-- News Ticker -->
+    <div class="news-slider">
+        <div class="news-item active">
+            <strong>News today:</strong> Summer Sale - Up to 50% Off!
         </div>
-
-        <!-- Product 5 -->
-        <div class="product-card">
-            <div class="badge-container">
-                <span class="discount-badge">20% OFF</span>
-            </div>
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/300x200?text=Product+5" alt="Product 5" class="product-image">
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">Bluetooth Portable Speaker - Waterproof</h3>
-                <div class="price-container">
-                    <span class="current-price">$79.99</span>
-                    <span class="original-price">$99.99</span>
-                </div>
-                <button class="view-details" onclick="window.location.href='product-details.html?id=5'">
-                    View Details
-                </button>
-            </div>
+        <div class="news-item">
+            <strong>New Arrivals:</strong> Check out our latest products
         </div>
-
-        <!-- Product 6 -->
-        <div class="product-card">
-            <div class="badge-container">
-                <span class="discount-badge">40% OFF</span>
-            </div>
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/300x200?text=Product+6" alt="Product 6" class="product-image">
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">Gaming Laptop with RTX Graphics</h3>
-                <div class="price-container">
-                    <span class="current-price">$1,199.99</span>
-                    <span class="original-price">$1,999.99</span>
-                </div>
-                <button class="view-details" onclick="window.location.href='product-details.html?id=6'">
-                    View Details
-                </button>
-            </div>
+        <div class="news-item">
+            <strong>Free Shipping:</strong> On all orders over ₹999
         </div>
-
-        <!-- Product 7 -->
-        <div class="product-card">
-            <div class="badge-container">
-                <span class="discount-badge">5% OFF</span>
-            </div>
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/300x200?text=Product+7" alt="Product 7" class="product-image">
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">Wireless Charging Pad - Fast Charge</h3>
-                <div class="price-container">
-                    <span class="current-price">$47.99</span>
-                    <span class="original-price">$49.99</span>
-                </div>
-                <button class="view-details" onclick="window.location.href='product-details.html?id=7'">
-                    View Details
-                </button>
-            </div>
+        <div class="news-item">
+            <strong>Special Offer:</strong> Buy 1 Get 1 Free on selected items
         </div>
+    </div>
 
-        <!-- Product 8 -->
-        <div class="product-card">
-            <div class="badge-container">
-                <span class="discount-badge">50% OFF</span>
-            </div>
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/300x200?text=Product+8" alt="Product 8" class="product-image">
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">4K Action Camera with Stabilization</h3>
-                <div class="price-container">
-                    <span class="current-price">$149.99</span>
-                    <span class="original-price">$299.99</span>
+    <!-- Banner Slider -->
+    <div class="banner-box">
+        <div class="banner-container">
+            <div class="banner-slides">
+                <div class="banner-slide">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" 
+                         alt="Summer Collection"
+                         srcset="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=300&q=80 600w,
+                                 https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&h=500&q=80 1920w"
+                         sizes="100vw">
                 </div>
-                <button class="view-details" onclick="window.location.href='product-details.html?id=8'">
-                    View Details
-                </button>
+                
+                <div class="banner-slide">
+                    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df" 
+                         alt="New Arrivals"
+                         srcset="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=300&q=80 600w,
+                                 https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&h=500&q=80 1920w"
+                         sizes="100vw">
+                </div>
+                
+                <div class="banner-slide">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" 
+                         alt="Special Offers"
+                         srcset="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=300&q=80 600w,
+                                 https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&h=500&q=80 1920w"
+                         sizes="100vw">
+                </div>
             </div>
-        </div>
 
-        <!-- Product 9 -->
-        <div class="product-card">
-            <div class="badge-container">
-                <span class="discount-badge">35% OFF</span>
+            <div class="banner-nav">
+                <div class="nav-arrow prev">&#10094;</div>
+                <div class="nav-arrow next">&#10095;</div>
             </div>
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/300x200?text=Product+9" alt="Product 9" class="product-image">
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">Ergonomic Office Chair - Executive</h3>
-                <div class="price-container">
-                    <span class="current-price">$259.99</span>
-                    <span class="original-price">$399.99</span>
-                </div>
-                <button class="view-details" onclick="window.location.href='product-details.html?id=9'">
-                    View Details
-                </button>
-            </div>
-        </div>
 
-        <!-- Product 10 -->
-        <div class="product-card">
-            <div class="badge-container">
-                <span class="discount-badge">10% OFF</span>
-            </div>
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/300x200?text=Product+10" alt="Product 10" class="product-image">
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">Smartphone with Triple Camera - 128GB</h3>
-                <div class="price-container">
-                    <span class="current-price">$449.99</span>
-                    <span class="original-price">$499.99</span>
-                </div>
-                <button class="view-details" onclick="window.location.href='product-details.html?id=10'">
-                    View Details
-                </button>
+            <div class="banner-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
             </div>
         </div>
     </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2 class="section-title">Featured Products</h2>
+        
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="badge-container">
+                    <span class="discount-badge">25% OFF</span>
+                </div>
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x200?text=Premium+Headphones" alt="Premium Headphones" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Premium Wireless Headphones with Noise Cancellation</h3>
+                    <div class="price-container">
+                        <span class="current-price">₹2,999</span>
+                        <span class="original-price">₹3,999</span>
+                    </div>
+                    <button class="view-details">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="badge-container">
+                    <span class="discount-badge">15% OFF</span>
+                </div>
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x200?text=Smart+Watch" alt="Smart Watch" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Smart Watch with Fitness Tracking</h3>
+                    <div class="price-container">
+                        <span class="current-price">₹3,399</span>
+                        <span class="original-price">₹3,999</span>
+                    </div>
+                    <button class="view-details">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="badge-container">
+                    <span class="discount-badge">30% OFF</span>
+                </div>
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x200?text=Bluetooth+Speaker" alt="Bluetooth Speaker" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Portable Bluetooth Speaker - Waterproof</h3>
+                    <div class="price-container">
+                        <span class="current-price">₹1,399</span>
+                        <span class="original-price">₹1,999</span>
+                    </div>
+                    <button class="view-details">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="badge-container">
+                    <span class="discount-badge">10% OFF</span>
+                </div>
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x200?text=Wireless+Charger" alt="Wireless Charger" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Fast Wireless Charging Pad</h3>
+                    <div class="price-container">
+                        <span class="current-price">₹899</span>
+                        <span class="original-price">₹999</span>
+                    </div>
+                    <button class="view-details">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="badge-container">
+                    <span class="discount-badge">20% OFF</span>
+                </div>
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x200?text=Phone+Case" alt="Phone Case" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Premium Leather Phone Case</h3>
+                    <div class="price-container">
+                        <span class="current-price">₹799</span>
+                        <span class="original-price">₹999</span>
+                    </div>
+                    <button class="view-details">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="badge-container">
+                    <span class="discount-badge">40% OFF</span>
+                </div>
+                <div class="product-image-container">
+                    <img src="https://via.placeholder.com/300x200?text=Power+Bank" alt="Power Bank" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">10000mAh Fast Charging Power Bank</h3>
+                    <div class="price-container">
+                        <span class="current-price">₹1,199</span>
+                        <span class="original-price">₹1,999</span>
+                    </div>
+                    <button class="view-details">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Header Dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileIcon = document.getElementById('profileIcon');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            
+            profileIcon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('show');
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.profile-section')) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+            
+            // News Ticker
+            const newsItems = document.querySelectorAll('.news-item');
+            let currentNewsIndex = 0;
+            
+            function rotateNews() {
+                newsItems[currentNewsIndex].classList.remove('active');
+                currentNewsIndex = (currentNewsIndex + 1) % newsItems.length;
+                newsItems[currentNewsIndex].classList.add('active');
+            }
+            
+            setInterval(rotateNews, 3000);
+            
+            // Banner Slider
+            const bannerSlides = document.querySelector('.banner-slides');
+            const slideItems = document.querySelectorAll('.banner-slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            
+            let currentSlideIndex = 0;
+            const totalSlides = slideItems.length;
+            let autoScrollInterval;
+            const slideInterval = 5000;
+            let isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+            function goToSlide(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+                
+                bannerSlides.style.transform = `translateX(-${index * 100}%)`;
+                currentSlideIndex = index;
+                
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[index].classList.add('active');
+            }
+
+            function startAutoScroll() {
+                autoScrollInterval = setInterval(() => {
+                    goToSlide(currentSlideIndex + 1);
+                }, slideInterval);
+            }
+
+            startAutoScroll();
+
+            if (!isMobile) {
+                document.querySelector('.banner-container').addEventListener('mouseenter', () => {
+                    clearInterval(autoScrollInterval);
+                });
+
+                document.querySelector('.banner-container').addEventListener('mouseleave', startAutoScroll);
+            }
+
+            nextBtn.addEventListener('click', () => {
+                goToSlide(currentSlideIndex + 1);
+                resetAutoScroll();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                goToSlide(currentSlideIndex - 1);
+                resetAutoScroll();
+            });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const slideIndex = parseInt(this.getAttribute('data-index'));
+                    goToSlide(slideIndex);
+                    resetAutoScroll();
+                });
+            });
+
+            if (isMobile) {
+                let touchStartX = 0;
+                let touchEndX = 0;
+
+                bannerSlides.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    clearInterval(autoScrollInterval);
+                }, {passive: true});
+
+                bannerSlides.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                    resetAutoScroll();
+                }, {passive: true});
+
+                function handleSwipe() {
+                    const threshold = 50;
+                    if (touchEndX < touchStartX - threshold) {
+                        goToSlide(currentSlideIndex + 1);
+                    } else if (touchEndX > touchStartX + threshold) {
+                        goToSlide(currentSlideIndex - 1);
+                    }
+                }
+            }
+
+            function resetAutoScroll() {
+                clearInterval(autoScrollInterval);
+                startAutoScroll();
+            }
+
+            window.addEventListener('resize', function() {
+                isMobile = window.matchMedia("(max-width: 768px)").matches;
+                bannerSlides.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            });
+        });
+    </script>
 </body>
-</html>>
+</html>
