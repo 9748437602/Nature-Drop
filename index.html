@@ -326,11 +326,22 @@
             background-color: #ff69b4;
         }
 
+        /* UPDATED PRODUCT GRID - 2 COLUMNS ON MOBILE, 4 ON DESKTOP */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
+            gap: 15px;
+            padding: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr); /* 4 columns for desktop */
+                gap: 25px;
+                padding: 25px;
+            }
         }
 
         .product-card {
