@@ -484,7 +484,7 @@
             <div class="product-info">
                 <div class="product-title">Wireless Bluetooth Headphones with Noise Cancellation</div>
                 <div class="product-price">₹1,299</div>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart">view details</button>
             </div>
         </div>
         
@@ -573,7 +573,7 @@
             setInterval(rotateBanner, 5000);
             
             // Add to cart functionality
-            const addToCartButtons = document.querySelectorAll('.product-details');
+            const addToCartButtons = document.querySelectorAll('.view-details');
             addToCartButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const productTitle = this.parentElement.querySelector('.product-title').textContent;
