@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background: #fcefef;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #ff6b81;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar a:hover {
+      background: #ff4d6d;
+    }
+
+    .main {
+      flex: 1;
+      background: white;
+      padding: 20px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff0f0;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .topbar h1 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .topbar .profile {
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .cards {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      padding: 20px;
+      background: #ffe9ec;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        padding: 10px;
+      }
+
+      .topbar h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Admin</h2>
+    <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+    <a href="#"><i class="fas fa-box"></i> Products</a>
+    <a href="#"><i class="fas fa-users"></i> Users</a>
+    <a href="#"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <h1>Dashboard</h1>
+      <div class="profile"><i class="fas fa-user-circle"></i></div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Total Users</h3>
+        <p>1,234</p>
+      </div>
+      <div class="card">
+        <h3>Total Orders</h3>
+        <p>567</p>
+      </div>
+      <div class="card">
+        <h3>Revenue</h3>
+        <p>₹2,50,000</p>
+      </div>
+      <div class="card">
+        <h3>Products</h3>
+        <p>78</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
