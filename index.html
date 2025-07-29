@@ -397,7 +397,7 @@
             margin-bottom: 10px;
         }
         
-        .add-to-cart {
+        .view-details {
             width: 100%;
             padding: 8px 0;
             background: #ff69b4;
@@ -408,7 +408,7 @@
             transition: background 0.3s ease;
         }
         
-        .add-to-cart:hover {
+        .view-details:hover {
             background: #ff4785;
         }
         
@@ -443,7 +443,7 @@
                 height: 36px;
             }
             
-            .add-to-cart {
+            .view-details {
                 font-size: 12px;
                 padding: 6px 0;
             }
@@ -572,9 +572,9 @@
             // Rotate every 5 seconds
             setInterval(rotateBanner, 5000);
             
-            // Add to cart functionality
-            const addToCartButtons = document.querySelectorAll('.view-details');
-            addToCartButtons.forEach(button => {
+            // view details functionality
+            const view-detailsButtons = document.querySelectorAll('.view-details');
+            view-detailsButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const productTitle = this.parentElement.querySelector('.product-title').textContent;
                     alert(`${productTitle} view details!`);
