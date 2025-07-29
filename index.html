@@ -255,7 +255,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto-Scrolling Banner</title>
+    <title>Responsive Auto-Scrolling Banner</title>
     <style>
         /* Basic Reset */
         * {
@@ -265,12 +265,14 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Banner Container */
+        /* Banner Container - Responsive Height */
         .banner-container {
             width: 100%;
             overflow: hidden;
             position: relative;
-            height: 400px; /* Adjust height as needed */
+            height: 60vh; /* Responsive height based on viewport */
+            max-height: 600px; /* Maximum height for desktop */
+            min-height: 300px; /* Minimum height for mobile */
         }
 
         /* Banner Slides */
@@ -292,52 +294,75 @@
             object-fit: cover;
         }
 
-        /* Navigation Dots */
+        /* Navigation Dots - Responsive Size */
         .banner-dots {
             position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
 
         .dot.active {
             background-color: white;
+            transform: scale(1.2);
         }
 
-        /* Navigation Arrows */
+        /* Navigation Arrows - Responsive */
         .banner-nav {
             position: absolute;
             top: 50%;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 15px;
             transform: translateY(-50%);
         }
 
         .nav-arrow {
             color: white;
-            font-size: 2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             background-color: rgba(0, 0, 0, 0.5);
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             user-select: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .nav-arrow:hover {
+            opacity: 1;
+        }
+
+        /* Hide arrows on mobile */
+        @media (max-width: 768px) {
+            .nav-arrow {
+                display: none;
+            }
+            
+            .banner-dots {
+                bottom: 10px;
+            }
+            
+            .dot {
+                width: 8px;
+                height: 8px;
+            }
         }
 
         /* Website Content */
@@ -352,16 +377,32 @@
     <div class="banner-container">
         <div class="banner-slides">
             <div class="banner-slide">
-                <img src="images/ads banner" alt="Advertisement 1">
+                <img src="<img src="images/ads banner.png" alt="Advertisement 1"> 
+                     alt="Advertisement 1"
+                     srcset="https://via.placeholder.com/600x300/FF5733/FFFFFF?text=Mobile+Banner+1 600w,
+                             https://via.placeholder.com/1920x600/FF5733/FFFFFF?text=Desktop+Banner+1 1920w"
+                     sizes="(max-width: 600px) 600px, 1920px">
             </div>
             <div class="banner-slide">
-                <img src="images/ads banner" alt="Advertisement 2">
+                <img src="<img src="images/ads banner.png" alt="Advertisement 2"> 
+                     alt="Advertisement 2"
+                     srcset="https://via.placeholder.com/600x300/33FF57/FFFFFF?text=Mobile+Banner+2 600w,
+                             https://via.placeholder.com/1920x600/33FF57/FFFFFF?text=Desktop+Banner+2 1920w"
+                     sizes="(max-width: 600px) 600px, 1920px">
             </div>
             <div class="banner-slide">
-                <img src="images/ads banner" alt="Advertisement 3">
+                <img src="<img src="images/ads banner.png" alt="Advertisement 3">
+                     alt="Advertisement 3"
+                     srcset="https://via.placeholder.com/600x300/3357FF/FFFFFF?text=Mobile+Banner+3 600w,
+                             https://via.placeholder.com/1920x600/3357FF/FFFFFF?text=Desktop+Banner+3 1920w"
+                     sizes="(max-width: 600px) 600px, 1920px">
             </div>
             <div class="banner-slide">
-                <img src="images/ads banner" alt="Advertisement 4">
+                <img src="<img src="images/ads banner.png" alt="Advertisement 4"> 
+                     alt="Advertisement 4"
+                     srcset="https://via.placeholder.com/600x300/F333FF/FFFFFF?text=Mobile+Banner+4 600w,
+                             https://via.placeholder.com/1920x600/F333FF/FFFFFF?text=Desktop+Banner+4 1920w"
+                     sizes="(max-width: 600px) 600px, 1920px">
             </div>
         </div>
 
@@ -395,6 +436,7 @@
             const totalSlides = slideItems.length;
             let autoScrollInterval;
             const slideInterval = 8000; // 8 seconds
+            let touchEnabled = 'ontouchstart' in window;
 
             // Function to go to specific slide
             function goToSlide(index) {
@@ -422,25 +464,25 @@
             // Initialize auto-scroll
             startAutoScroll();
 
-            // Pause auto-scroll on hover
-            document.querySelector('.banner-container').addEventListener('mouseenter', () => {
-                clearInterval(autoScrollInterval);
-            });
+            // Pause auto-scroll on hover (desktop only)
+            if (!touchEnabled) {
+                document.querySelector('.banner-container').addEventListener('mouseenter', () => {
+                    clearInterval(autoScrollInterval);
+                });
 
-            // Resume auto-scroll when mouse leaves
-            document.querySelector('.banner-container').addEventListener('mouseleave', startAutoScroll);
+                // Resume auto-scroll when mouse leaves
+                document.querySelector('.banner-container').addEventListener('mouseleave', startAutoScroll);
+            }
 
             // Navigation arrows
             nextBtn.addEventListener('click', () => {
                 goToSlide(currentIndex + 1);
-                clearInterval(autoScrollInterval);
-                startAutoScroll();
+                resetAutoScroll();
             });
 
             prevBtn.addEventListener('click', () => {
                 goToSlide(currentIndex - 1);
-                clearInterval(autoScrollInterval);
-                startAutoScroll();
+                resetAutoScroll();
             });
 
             // Dot navigation
@@ -448,34 +490,46 @@
                 dot.addEventListener('click', function() {
                     const slideIndex = parseInt(this.getAttribute('data-index'));
                     goToSlide(slideIndex);
-                    clearInterval(autoScrollInterval);
-                    startAutoScroll();
+                    resetAutoScroll();
                 });
             });
 
-            // Touch/swipe support
-            let touchStartX = 0;
-            let touchEndX = 0;
+            // Touch/swipe support for mobile
+            if (touchEnabled) {
+                let touchStartX = 0;
+                let touchEndX = 0;
 
-            slides.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-                clearInterval(autoScrollInterval);
-            });
+                slides.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    clearInterval(autoScrollInterval);
+                }, {passive: true});
 
-            slides.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-                startAutoScroll();
-            });
+                slides.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                    resetAutoScroll();
+                }, {passive: true});
 
-            function handleSwipe() {
-                const threshold = 50;
-                if (touchEndX < touchStartX - threshold) {
-                    goToSlide(currentIndex + 1); // Swipe left
-                } else if (touchEndX > touchStartX + threshold) {
-                    goToSlide(currentIndex - 1); // Swipe right
+                function handleSwipe() {
+                    const threshold = 50;
+                    if (touchEndX < touchStartX - threshold) {
+                        goToSlide(currentIndex + 1); // Swipe left
+                    } else if (touchEndX > touchStartX + threshold) {
+                        goToSlide(currentIndex - 1); // Swipe right
+                    }
                 }
             }
+
+            // Reset auto-scroll timer
+            function resetAutoScroll() {
+                clearInterval(autoScrollInterval);
+                startAutoScroll();
+            }
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            });
         });
     </script>
 </body>
