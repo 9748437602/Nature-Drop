@@ -300,19 +300,18 @@
         
         body {
             background-color: #fff5f7;
-            padding: 10px;
+            padding: 15px;
         }
         
         .product-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 15px;
             width: 100%;
-            justify-content: space-between;
+            justify-content: flex-start;
         }
         
         .product-box {
-            width: calc(50% - 6px);
             border: 1px solid #ffd6e0;
             border-radius: 10px;
             overflow: hidden;
@@ -320,6 +319,9 @@
             box-shadow: 0 2px 8px rgba(255, 105, 180, 0.1);
             transition: all 0.3s ease;
             position: relative;
+            
+            /* Mobile first - 2 columns */
+            width: calc(50% - 8px);
         }
         
         .product-box:hover {
@@ -446,6 +448,26 @@
         .product-box:nth-child(8) { animation-delay: 0.8s; }
         .product-box:nth-child(9) { animation-delay: 0.9s; }
         .product-box:nth-child(10) { animation-delay: 1.0s; }
+        .product-box:nth-child(11) { animation-delay: 1.1s; }
+        .product-box:nth-child(12) { animation-delay: 1.2s; }
+
+        /* Tablet view (3 columns) */
+        @media (min-width: 600px) {
+            .product-box {
+                width: calc(33.33% - 10px);
+            }
+        }
+
+        /* Desktop view (4 columns) */
+        @media (min-width: 900px) {
+            .product-box {
+                width: calc(25% - 12px);
+            }
+            
+            .product-image {
+                height: 160px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -566,6 +588,30 @@
             <div class="product-details">
                 <div class="product-title">Noise Cancelling Earbuds with 30hr Battery</div>
                 <div class="product-price">৳2,899</div>
+                <button class="view-details-btn">View Details</button>
+            </div>
+        </div>
+        
+        <!-- Product Box 11 -->
+        <div class="product-box" onclick="navigateToProduct('product11')">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x200?text=Product+11" alt="Product 11">
+            </div>
+            <div class="product-details">
+                <div class="product-title">Smart Watch with Fitness Tracking</div>
+                <div class="product-price">৳4,299</div>
+                <button class="view-details-btn">View Details</button>
+            </div>
+        </div>
+        
+        <!-- Product Box 12 -->
+        <div class="product-box" onclick="navigateToProduct('product12')">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/300x200?text=Product+12" alt="Product 12">
+            </div>
+            <div class="product-details">
+                <div class="product-title">Wireless Earbuds with Charging Case</div>
+                <div class="product-price">৳2,199</div>
                 <button class="view-details-btn">View Details</button>
             </div>
         </div>
