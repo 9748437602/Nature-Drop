@@ -1,113 +1,895 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Product Details | Nature Drop</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .product-details {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .product-images {
-      flex: 1;
-      min-width: 300px;
-    }
-    .product-images img {
-      width: 100%;
-      max-height: 350px;
-      object-fit: contain;
-      border: 1px solid #eee;
-      border-radius: 8px;
-    }
-    .thumbnail-list {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
-    .thumbnail-list img {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .product-info {
-      flex: 1;
-      min-width: 300px;
-    }
-    .product-info h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-    .product-info p.price {
-      font-size: 22px;
-      color: green;
-      margin-bottom: 20px;
-    }
-    .product-info button {
-      padding: 12px 20px;
-      background: #f06292;
-      border: none;
-      color: #fff;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .share-icon {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 20px;
-      color: #f06292;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Wireless Headphones - Product Details</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Product Main Section */
+        .product-main {
+            display: flex;
+            flex-wrap: wrap;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .product-gallery {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .main-image-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .zoom-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        /* Custom Share Button Styles */
+        .share-button-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+        }
+        
+        .share-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            padding: 0;
+        }
+        
+        .share-btn:hover {
+            background: #fff;
+            transform: scale(1.1);
+        }
+        
+        .share-btn img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+        
+        .share-options {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 150px;
+        }
+        
+        .share-options a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .share-options a:hover {
+            background: #f5f5f5;
+        }
+        
+        .share-options.show {
+            display: flex;
+        }
+        
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+        
+        .thumbnail {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: border 0.2s;
+        }
+        
+        .thumbnail:hover {
+            border-color: #777;
+        }
+        
+        .product-info {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            border-left: 1px solid #eee;
+        }
+        
+        .product-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #222;
+            font-weight: 600;
+        }
+        
+        .brand-name {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .rating-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .stars {
+            color: #ffc107;
+            margin-right: 10px;
+        }
+        
+        .review-count {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .review-count:hover {
+            text-decoration: underline;
+        }
+        
+        .price-container {
+            margin: 20px 0;
+        }
+        
+        .current-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: #e53935;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            margin-left: 10px;
+            font-size: 20px;
+        }
+        
+        .discount-badge {
+            background: #e53935;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        .availability {
+            color: #388e3c;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .product-description {
+            margin-bottom: 25px;
+            color: #555;
+        }
+        
+        .product-actions {
+            margin-top: 30px;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            height: 35px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+            border: none;
+            font-weight: 500;
+        }
+        
+        .btn-primary {
+            background-color: #2e86de;
+            color: white;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2667b5;
+        }
+        
+        .btn-secondary {
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #ddd;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e9ecef;
+        }
+        
+        .wishlist-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .wishlist-btn:hover {
+            color: #e53935;
+        }
+        
+        .product-meta {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .meta-item {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        
+        .meta-label {
+            font-weight: 600;
+            width: 120px;
+            color: #666;
+        }
+        
+        .meta-value {
+            flex: 1;
+        }
+        
+        /* Product Tabs Section */
+        .product-tabs {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tab-btn {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            position: relative;
+        }
+        
+        .tab-btn.active {
+            color: #2e86de;
+        }
+        
+        .tab-btn.active:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #2e86de;
+        }
+        
+        .tab-content {
+            padding: 25px;
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .specifications-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .specifications-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .specifications-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .specifications-table td:first-child {
+            font-weight: 600;
+            width: 30%;
+            color: #666;
+        }
+        
+        /* Related Products */
+        .related-products {
+            margin-top: 40px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .product-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .product-card-body {
+            padding: 15px;
+        }
+        
+        .product-card-title {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .product-card-price {
+            font-weight: 700;
+            color: #e53935;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .product-main {
+                flex-direction: column;
+            }
+            
+            .product-info {
+                border-left: none;
+                border-top: 1px solid #eee;
+            }
+            
+            .main-image {
+                height: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <div class="product-details">
-    <div class="product-images">
-      <i class="fas fa-share-alt share-icon"></i>
-      <img id="mainImage" src="images/cri%20pump.png" alt="Product Image" />
-      <div class="thumbnail-list">
-        <img src="images/cri pump.png" onclick="changeImage(this.src)" />
-        <img src="images/cri pump.png" onclick="changeImage(this.src)" />
-        <img src="images/cri pump.png" onclick="changeImage(this.src)" />
-        <img src="images/cri pump.png" onclick="changeImage(this.src)" />
-      </div>
+    <div class="container">
+        <!-- Main Product Section -->
+        <div class="product-main">
+            <div class="product-gallery">
+                <div class="main-image-container">
+                    <!-- Custom Share Button with Your Logo -->
+                    <div class="share-button-container">
+                        <button class="share-btn" id="shareBtn">
+                            <!-- Replace with your own share logo image -->
+                            <img src="https://via.placeholder.com/20x20" alt="Share">
+                        </button>
+                        <div class="share-options" id="shareOptions">
+                            <a href="#" class="facebook-share">
+                                <img src="https://via.placeholder.com/16x16" alt="Facebook"> Facebook
+                            </a>
+                            <a href="#" class="twitter-share">
+                                <img src="https://via.placeholder.com/16x16" alt="Twitter"> Twitter
+                            </a>
+                            <a href="#" class="whatsapp-share">
+                                <img src="https://via.placeholder.com/16x16" alt="WhatsApp"> WhatsApp
+                            </a>
+                            <a href="#" class="email-share">
+                                <img src="https://via.placeholder.com/16x16" alt="Email"> Email
+                            </a>
+                            <a href="#" class="copy-link">
+                                <img src="https://via.placeholder.com/16x16" alt="Copy Link"> Copy Link
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <img src="https://via.placeholder.com/600x400" alt="Premium Wireless Headphones" class="main-image">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+                <div class="thumbnail-container">
+                    <img src="https://via.placeholder.com/150x150" alt="Headphones Front View" class="thumbnail">
+                    <img src="https://via.placeholder.com/150x150" alt="Headphones Side View" class="thumbnail">
+                    <img src="https://via.placeholder.com/150x150" alt="Headphones with Case" class="thumbnail">
+                    <img src="https://via.placeholder.com/150x150" alt="Headphones Details" class="thumbnail">
+                    <img src="https://via.placeholder.com/150x150" alt="Headphones in Use" class="thumbnail">
+                </div>
+            </div>
+            
+            <div class="product-info">
+                <h1 class="product-title">Premium Wireless Headphones Pro X3</h1>
+                <div class="brand-name">by AudioMaster</div>
+                
+                <div class="rating-container">
+                    <div class="stars">★★★★★</div>
+                    <a href="#reviews" class="review-count">142 Reviews</a>
+                </div>
+                
+                <div class="price-container">
+                    <span class="current-price">$199.99</span>
+                    <span class="original-price">$249.99</span>
+                    <span class="discount-badge">20% OFF</span>
+                </div>
+                
+                <div class="availability">In Stock (Ready to Ship)</div>
+                
+                <div class="product-description">
+                    <p>Experience unparalleled sound quality with our Premium Wireless Headphones Pro X3. Featuring advanced noise cancellation technology, 40mm high-fidelity drivers, and 30-hour battery life for uninterrupted listening pleasure.</p>
+                    <p>Ergonomic design with memory foam ear cushions for all-day comfort. Includes carrying case and 3.5mm audio cable for wired listening.</p>
+                </div>
+                
+                <div class="product-actions">
+                    <div class="quantity-selector">
+                        <button class="quantity-btn">−</button>
+                        <input type="number" value="1" min="1" class="quantity-input">
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Buy Now</button>
+                    </div>
+                    
+                    <button class="wishlist-btn">
+                        <span>❤</span> Add to Wishlist
+                    </button>
+                </div>
+                
+                <div class="product-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">SKU:</span>
+                        <span class="meta-value">AM-PHX3-BLK</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Brand:</span>
+                        <span class="meta-value">AudioMaster</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Color:</span>
+                        <span class="meta-value">Matte Black</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Connectivity:</span>
+                        <span class="meta-value">Bluetooth 5.0, 3.5mm Jack</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Warranty:</span>
+                        <span class="meta-value">2 Years Manufacturer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product Tabs Section -->
+        <div class="product-tabs">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="description">Description</button>
+                <button class="tab-btn" data-tab="specifications">Specifications</button>
+                <button class="tab-btn" data-tab="reviews">Reviews (142)</button>
+                <button class="tab-btn" data-tab="shipping">Shipping & Returns</button>
+            </div>
+            
+            <div id="description" class="tab-content active">
+                <h3>Detailed Product Description</h3>
+                <p>The Premium Wireless Headphones Pro X3 represent the pinnacle of audio engineering, combining cutting-edge technology with luxurious comfort for the ultimate listening experience.</p>
+                
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Advanced Noise Cancellation:</strong> Industry-leading ANC technology blocks up to 95% of ambient noise</li>
+                    <li><strong>High-Fidelity Sound:</strong> 40mm dynamic drivers deliver crisp highs and deep, powerful bass</li>
+                    <li><strong>All-Day Comfort:</strong> Memory foam ear cushions and adjustable headband</li>
+                    <li><strong>Extended Battery Life:</strong> Up to 30 hours playback with ANC on (40 hours with ANC off)</li>
+                    <li><strong>Multi-Point Connectivity:</strong> Connect to two devices simultaneously</li>
+                    <li><strong>Built-in Microphone:</strong> Crystal-clear calls with echo cancellation</li>
+                    <li><strong>Foldable Design:</strong> Compact folding mechanism for easy storage</li>
+                </ul>
+                
+                <h4>What's in the Box:</h4>
+                <ul>
+                    <li>Premium Wireless Headphones Pro X3</li>
+                    <li>Premium carrying case</li>
+                    <li>3.5mm audio cable</li>
+                    <li>USB-C charging cable</li>
+                    <li>Quick start guide</li>
+                    <li>2-year warranty card</li>
+                </ul>
+            </div>
+            
+            <div id="specifications" class="tab-content">
+                <h3>Technical Specifications</h3>
+                <table class="specifications-table">
+                    <tr>
+                        <td>Model</td>
+                        <td>Pro X3</td>
+                    </tr>
+                    <tr>
+                        <td>Color</td>
+                        <td>Matte Black</td>
+                    </tr>
+                    <tr>
+                        <td>Driver Diameter</td>
+                        <td>40mm</td>
+                    </tr>
+                    <tr>
+                        <td>Frequency Response</td>
+                        <td>4Hz-40kHz</td>
+                    </tr>
+                    <tr>
+                        <td>Impedance</td>
+                        <td>32Ω</td>
+                    </tr>
+                    <tr>
+                        <td>Bluetooth Version</td>
+                        <td>5.0</td>
+                    </tr>
+                    <tr>
+                        <td>Wireless Range</td>
+                        <td>Up to 10m (33ft)</td>
+                    </tr>
+                    <tr>
+                        <td>Battery Life (ANC on)</td>
+                        <td>Up to 30 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Charging Time</td>
+                        <td>2.5 hours (USB-C)</td>
+                    </tr>
+                    <tr>
+                        <td>Weight</td>
+                        <td>258g (9.1oz)</td>
+                    </tr>
+                    <tr>
+                        <td>Dimensions (folded)</td>
+                        <td>18.5 x 17 x 5 cm (7.3 x 6.7 x 2 in)</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div id="reviews" class="tab-content">
+                <h3>Customer Reviews</h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <div style="font-size: 24px; margin-right: 15px;">★★★★★ <span style="font-size: 16px;">4.8/5</span></div>
+                        <div>142 global ratings</div>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="width: 80px;">5 star</span>
+                            <progress value="85" max="100" style="flex: 1; height: 10px;"></progress>
+                            <span style="width: 40px; text-align: right;">85%</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <span style="width: 80px;">4 star</span>
+                            <progress value="10" max="100" style="flex: 1; height: 10px;"></progress>
+                            <span style="width: 40px; text-align: right;">10%</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <span style="width: 80px;">3 star</span>
+                            <progress value="3" max="100" style="flex: 1; height: 10px;"></progress>
+                            <span style="width: 40px; text-align: right;">3%</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <span style="width: 80px;">2 star</span>
+                            <progress value="1" max="100" style="flex: 1; height: 10px;"></progress>
+                            <span style="width: 40px; text-align: right;">1%</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <span style="width: 80px;">1 star</span>
+                            <progress value="1" max="100" style="flex: 1; height: 10px;"></progress>
+                            <span style="width: 40px; text-align: right;">1%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <h4>Featured Reviews</h4>
+                    
+                    <div style="border: 1px solid #eee; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div>
+                                <strong>Alex Johnson</strong> - <span style="color: #ffc107;">★★★★★</span>
+                            </div>
+                            <div style="color: #666; font-size: 14px;">Verified Purchase · 2 weeks ago</div>
+                        </div>
+                        <h5 style="margin-bottom: 8px;">Best headphones I've ever owned</h5>
+                        <p>The noise cancellation is incredible - I can't hear anything when these are on. The sound quality is amazing, with deep bass and crisp highs. Very comfortable for long listening sessions.</p>
+                    </div>
+                    
+                    <div style="border: 1px solid #eee; border-radius: 8px; padding: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div>
+                                <strong>Sarah M.</strong> - <span style="color: #ffc107;">★★★★☆</span>
+                            </div>
+                            <div style="color: #666; font-size: 14px;">Verified Purchase · 1 month ago</div>
+                        </div>
+                        <h5 style="margin-bottom: 8px;">Great sound but could be more comfortable</h5>
+                        <p>The audio quality is exceptional, especially for wireless headphones. My only complaint is that after 3-4 hours of continuous use, my ears start to feel a bit warm. Battery life is as advertised.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="shipping" class="tab-content">
+                <h3>Shipping Information</h3>
+                <p>We offer fast and reliable shipping options to get your order to you as quickly as possible.</p>
+                
+                <h4>Shipping Options:</h4>
+                <ul>
+                    <li><strong>Standard Shipping:</strong> 3-5 business days - $5.99 (Free on orders over $50)</li>
+                    <li><strong>Expedited Shipping:</strong> 2-3 business days - $12.99</li>
+                    <li><strong>Overnight Shipping:</strong> Next business day - $24.99</li>
+                </ul>
+                
+                <h4>International Shipping:</h4>
+                <p>We ship to most countries worldwide. International shipping rates and delivery times vary by destination.</p>
+                
+                <h3>Return Policy</h3>
+                <p>We want you to be completely satisfied with your purchase. If for any reason you're not happy with your headphones, you may return them within 30 days of receipt for a full refund or exchange.</p>
+                
+                <h4>Return Conditions:</h4>
+                <ul>
+                    <li>Item must be in original condition with all accessories</li>
+                    <li>Original packaging must be included</li>
+                    <li>Proof of purchase required</li>
+                </ul>
+                
+                <p>To initiate a return, please contact our customer service team.</p>
+            </div>
+        </div>
+        
+        <!-- Related Products -->
+        <div class="related-products">
+            <h2 class="section-title">You May Also Like</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/250x200" alt="Wireless Earbuds" class="product-card-image">
+                    <div class="product-card-body">
+                        <h3 class="product-card-title">True Wireless Earbuds Pro</h3>
+                        <div class="product-card-price">$129.99</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/250x200" alt="Bluetooth Speaker" class="product-card-image">
+                    <div class="product-card-body">
+                        <h3 class="product-card-title">Portable Bluetooth Speaker</h3>
+                        <div class="product-card-price">$79.99</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/250x200" alt="Headphone Stand" class="product-card-image">
+                    <div class="product-card-body">
+                        <h3 class="product-card-title">Premium Aluminum Headphone Stand</h3>
+                        <div class="product-card-price">$39.99</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/250x200" alt="Carrying Case" class="product-card-image">
+                    <div class="product-card-body">
+                        <h3 class="product-card-title">Hard Shell Carrying Case</h3>
+                        <div class="product-card-price">$29.99</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="product-info">
-      <h1>CRI Water Pump 1HP</h1>
-      <p class="price">₹3,999</p>
-      <p>Powerful 1HP CRI water pump suitable for home and agricultural use. Energy-efficient and built to last.</p>
-      <button>Buy Now</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  function changeImage(src) {
-    document.getElementById('mainImage').src = src;
-  }
-</script>
+    
+    <script>
+        // Share Button Functionality
+        const shareBtn = document.getElementById('shareBtn');
+        const shareOptions = document.getElementById('shareOptions');
+        
+        shareBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            shareOptions.classList.toggle('show');
+        });
+        
+        // Close share options when clicking elsewhere
+        document.addEventListener('click', () => {
+            shareOptions.classList.remove('show');
+        });
+        
+        // Prevent closing when clicking inside share options
+        shareOptions.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        
+        // Actual share functionality
+        document.querySelectorAll('.share-options a').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const productTitle = document.querySelector('.product-title').textContent;
+                const productUrl = window.location.href;
+                
+                if (option.classList.contains('facebook-share')) {
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`, '_blank');
+                } else if (option.classList.contains('twitter-share')) {
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out ${productTitle} - ${productUrl}`)}`, '_blank');
+                } else if (option.classList.contains('whatsapp-share')) {
+                    window.open(`https://wa.me/?text=${encodeURIComponent(`Check out this product: ${productTitle} ${productUrl}`)}`, '_blank');
+                } else if (option.classList.contains('email-share')) {
+                    window.open(`mailto:?subject=${encodeURIComponent(productTitle)}&body=${encodeURIComponent(`I thought you might like this product: ${productTitle}\n\n${productUrl}`)}`, '_blank');
+                } else if (option.classList.contains('copy-link')) {
+                    navigator.clipboard.writeText(productUrl);
+                    alert('Link copied to clipboard!');
+                }
+                
+                shareOptions.classList.remove('show');
+            });
+        });
+        
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                
+                // Hide all tab contents
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Deactivate all tab buttons
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Activate current tab
+                document.getElementById(tabId).classList.add('active');
+                button.classList.add('active');
+            });
+        });
+        
+        // Quantity selector functionality
+        const quantityInput = document.querySelector('.quantity-input');
+        document.querySelectorAll('.quantity-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (button.textContent === '+') {
+                    quantityInput.value = value + 1;
+                } else {
+                    if (value > 1) {
+                        quantityInput.value = value - 1;
+                    }
+                }
+            });
+        });
+        
+        // Thumbnail click functionality
+        document.querySelectorAll('.thumbnail').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                const mainImage = document.querySelector('.main-image');
+                mainImage.src = thumb.src.replace('150x150', '600x400');
+            });
+        });
+    </script>
 </body>
 </html>
