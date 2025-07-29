@@ -250,7 +250,97 @@
 
 
 
-<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Changing News Ticker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        .news-slider {
+            background-color: #f8f8f8;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .news-item {
+            display: none;
+            font-size: 1.1em;
+            padding: 10px 0;
+        }
+        
+        .news-item.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Auto-changing News Ticker -->
+    <div class="news-slider">
+        <div class="news-item active">
+            <strong>News 1:</strong> This is the first news item that will change every 3 seconds.
+        </div>
+        <div class="news-item">
+            <strong>News 2:</strong> Second news item appears after 3 seconds with a smooth fade effect.
+        </div>
+        <div class="news-item">
+            <strong>News 3:</strong> Third news item in the rotation cycle.
+        </div>
+        <div class="news-item">
+            <strong>News 4:</strong> Final news item before it loops back to the beginning.
+        </div>
+    </div>
+
+    <script>
+        // Auto-changing news (every 3 seconds)
+        const newsItems = document.querySelectorAll('.news-item');
+        let currentNewsIndex = 0;
+        
+        function rotateNews() {
+            // Hide current item
+            newsItems[currentNewsIndex].classList.remove('active');
+            
+            // Move to next item
+            currentNewsIndex = (currentNewsIndex + 1) % newsItems.length;
+            
+            // Show next item
+            newsItems[currentNewsIndex].classList.add('active');
+        }
+        
+        // Start rotation every 3 seconds
+        setInterval(rotateNews, 3000);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
