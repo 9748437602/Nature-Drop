@@ -1,83 +1,984 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PayU Payment Gateway</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #6a11cb, #2575fc);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .container {
-      background-color: #ffffff20;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      width: 100%;
-      max-width: 400px;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #fff;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-      color: #eee;
-    }
-    input[type="text"], input[type="email"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: none;
-      outline: none;
-    }
-    input[type="submit"] {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      border: none;
-      background-color: #00c853;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    input[type="submit"]:hover {
-      background-color: #00b140;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | Nature Drop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f7ff, #e6f7ff);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 12px 15px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .round-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        .round-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: -0.5px;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        /* Payment Page Layout */
+        .payment-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        @media (min-width: 992px) {
+            .payment-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        /* Order Summary */
+        .order-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .summary-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .summary-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #38ef7d;
+            border-radius: 2px;
+        }
+        
+        .product-list {
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .product-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-details {
+            flex: 1;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+        
+        .product-price {
+            font-size: 14px;
+            color: #11998e;
+            font-weight: 700;
+        }
+        
+        .product-quantity {
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .summary-total {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .total-label {
+            color: #555;
+        }
+        
+        .total-value {
+            font-weight: 600;
+        }
+        
+        .grand-total {
+            font-size: 18px;
+            font-weight: 700;
+            color: #11998e;
+        }
+        
+        /* Payment Methods */
+        .payment-methods {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .payment-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .payment-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #38ef7d;
+            border-radius: 2px;
+        }
+        
+        .payment-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        
+        .payment-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .payment-tab.active {
+            color: #11998e;
+            border-bottom: 3px solid #11998e;
+        }
+        
+        .payment-tab:hover:not(.active) {
+            color: #38ef7d;
+        }
+        
+        .payment-content {
+            display: none;
+        }
+        
+        .payment-content.active {
+            display: block;
+        }
+        
+        /* Card Payment Form */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #11998e;
+            box-shadow: 0 0 0 2px rgba(17, 153, 142, 0.2);
+            outline: none;
+        }
+        
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .col {
+            flex: 1;
+        }
+        
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 25px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .card-icon.active {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+        
+        /* UPI Payment */
+        .upi-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .upi-method {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upi-method:hover {
+            border-color: #11998e;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .upi-method.active {
+            border-color: #11998e;
+            background: rgba(17, 153, 142, 0.05);
+        }
+        
+        .upi-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            object-fit: contain;
+        }
+        
+        .upi-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        /* Net Banking */
+        .bank-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .bank-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .bank-item:hover {
+            border-color: #11998e;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .bank-item.active {
+            border-color: #11998e;
+            background: rgba(17, 153, 142, 0.05);
+        }
+        
+        .bank-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            object-fit: contain;
+        }
+        
+        .bank-name {
+            font-weight: 500;
+            color: #444;
+        }
+        
+        /* Wallets */
+        .wallet-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .wallet-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .wallet-item:hover {
+            border-color: #11998e;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .wallet-item.active {
+            border-color: #11998e;
+            background: rgba(17, 153, 142, 0.05);
+        }
+        
+        .wallet-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            object-fit: contain;
+        }
+        
+        .wallet-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        /* Pay Button */
+        .pay-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(17, 153, 142, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .pay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(17, 153, 142, 0.4);
+        }
+        
+        .pay-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Secure Payment Info */
+        .secure-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .secure-icon {
+            margin-right: 10px;
+            color: #11998e;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.08);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #777;
+            font-size: 11px;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-item i {
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+        
+        .nav-item.active {
+            color: #11998e;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 70px;
+            right: 15px;
+            background: #11998e;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #11998e;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            color: #11998e;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Paying
-     Nature Drop</h2>
-    <form action="payu_payment.php" method="post">
-      <label for="amount">Amount:</label>
-      <input type="text" name="amount" value="" required>
+    <header>
+        <div class="top-bar">
+            <div class="logo-container">
+                <div class="round-logo">
+                    <img src="images/nature drop.png" alt="Nature Drop Logo">
+                </div>
+                <div class="logo-text">Nature Drop</div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="payment-container">
+            <!-- Order Summary Section -->
+            <div class="order-summary">
+                <h2 class="summary-title">Order Summary</h2>
+                
+                <div class="product-list">
+                    <!-- Product 1 -->
+                    <div class="product-item">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Product">
+                        </div>
+                        <div class="product-details">
+                            <h3 class="product-name">Premium Smartphone X Pro</h3>
+                            <div class="product-price">₹32,999</div>
+                            <div class="product-quantity">Qty: 1</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-item">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Product">
+                        </div>
+                        <div class="product-details">
+                            <h3 class="product-name">Smart Watch Series 5</h3>
+                            <div class="product-price">₹12,999</div>
+                            <div class="product-quantity">Qty: 1</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="summary-total">
+                    <div class="total-row">
+                        <span class="total-label">Subtotal</span>
+                        <span class="total-value">₹45,998</span>
+                    </div>
+                    <div class="total-row">
+                        <span class="total-label">Shipping</span>
+                        <span class="total-value">FREE</span>
+                    </div>
+                    <div class="total-row">
+                        <span class="total-label">Tax</span>
+                        <span class="total-value">₹2,300</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Total</span>
+                        <span>₹48,298</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Payment Methods Section -->
+            <div class="payment-methods">
+                <h2 class="payment-title">Payment Method</h2>
+                
+                <div class="payment-tabs">
+                    <div class="payment-tab active" data-tab="card">Credit/Debit Card</div>
+                    <div class="payment-tab" data-tab="upi">UPI</div>
+                    <div class="payment-tab" data-tab="netbanking">Net Banking</div>
+                    <div class="payment-tab" data-tab="wallet">Wallets</div>
+                </div>
+                
+                <!-- Card Payment -->
+                <div class="payment-content active" id="card-payment">
+                    <form id="cardPaymentForm">
+                        <div class="form-group">
+                            <label class="form-label">Card Number</label>
+                            <input type="text" class="form-control" placeholder="1234 5678 9012 3456" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Name on Card</label>
+                            <input type="text" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="form-label">Expiry Date</label>
+                                    <input type="text" class="form-control" placeholder="MM/YY" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="form-label">CVV</label>
+                                    <input type="text" class="form-control" placeholder="123" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-icons">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visa/visa-original.svg" class="card-icon active" alt="Visa">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mastercard/mastercard-original.svg" class="card-icon" alt="Mastercard">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png" class="card-icon" alt="Amex" style="height: 25px; width: auto;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/RuPay.svg/1200px-RuPay.svg.png" class="card-icon" alt="RuPay" style="height: 25px; width: auto;">
+                        </div>
+                        
+                        <button type="submit" class="pay-btn">
+                            <i class="fas fa-lock"></i> Pay ₹48,298
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- UPI Payment -->
+                <div class="payment-content" id="upi-payment">
+                    <div class="form-group">
+                        <label class="form-label">Enter UPI ID</label>
+                        <input type="text" class="form-control" placeholder="yourname@upi">
+                    </div>
+                    
+                    <p style="text-align: center; margin: 15px 0; color: #777;">OR</p>
+                    
+                    <h3 style="font-size: 14px; margin-bottom: 15px; color: #444;">Choose UPI App</h3>
+                    <div class="upi-methods">
+                        <div class="upi-method">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Paytm_Logo.png/640px-Paytm_Logo.png" class="upi-icon" alt="Paytm">
+                            <div class="upi-name">Paytm</div>
+                        </div>
+                        <div class="upi-method">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/PhonePe_Logo.svg/2560px-PhonePe_Logo.svg.png" class="upi-icon" alt="PhonePe">
+                            <div class="upi-name">PhonePe</div>
+                        </div>
+                        <div class="upi-method">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Google_Pay_%28GPay%29_Logo_%282018-2020%29.svg/2560px-Google_Pay_%28GPay%29_Logo_%282018-2020%29.svg.png" class="upi-icon" alt="Google Pay">
+                            <div class="upi-name">Google Pay</div>
+                        </div>
+                        <div class="upi-method">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/BHIM_Logo.svg/1200px-BHIM_Logo.svg.png" class="upi-icon" alt="BHIM">
+                            <div class="upi-name">BHIM</div>
+                        </div>
+                        <div class="upi-method">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Amazon_Pay_logo.svg/2560px-Amazon_Pay_logo.svg.png" class="upi-icon" alt="Amazon Pay">
+                            <div class="upi-name">Amazon Pay</div>
+                        </div>
+                        <div class="upi-method">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Mobikwik_new_logo.svg/2560px-Mobikwik_new_logo.svg.png" class="upi-icon" alt="MobiKwik">
+                            <div class="upi-name">MobiKwik</div>
+                        </div>
+                    </div>
+                    
+                    <button class="pay-btn">
+                        <i class="fas fa-lock"></i> Pay ₹48,298
+                    </button>
+                </div>
+                
+                <!-- Net Banking -->
+                <div class="payment-content" id="netbanking-payment">
+                    <h3 style="font-size: 14px; margin-bottom: 15px; color: #444;">Select Your Bank</h3>
+                    <div class="bank-list">
+                        <div class="bank-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/SBI-logo.svg/2560px-SBI-logo.svg.png" class="bank-icon" alt="SBI">
+                            <div class="bank-name">State Bank of India</div>
+                        </div>
+                        <div class="bank-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/HDFC_Bank_Logo.svg/2560px-HDFC_Bank_Logo.svg.png" class="bank-icon" alt="HDFC">
+                            <div class="bank-name">HDFC Bank</div>
+                        </div>
+                        <div class="bank-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/2560px-ICICI_Bank_Logo.svg.png" class="bank-icon" alt="ICICI">
+                            <div class="bank-name">ICICI Bank</div>
+                        </div>
+                        <div class="bank-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Axis_Bank_logo.svg/2560px-Axis_Bank_logo.svg.png" class="bank-icon" alt="Axis">
+                            <div class="bank-name">Axis Bank</div>
+                        </div>
+                        <div class="bank-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Kotak_Mahindra_Bank_Logo.svg/2560px-Kotak_Mahindra_Bank_Logo.svg.png" class="bank-icon" alt="Kotak">
+                            <div class="bank-name">Kotak Mahindra Bank</div>
+                        </div>
+                        <div class="bank-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/IDFC_First_Bank_Logo.svg/1200px-IDFC_First_Bank_Logo.svg.png" class="bank-icon" alt="IDFC">
+                            <div class="bank-name">IDFC First Bank</div>
+                        </div>
+                    </div>
+                    
+                    <button class="pay-btn">
+                        <i class="fas fa-lock"></i> Pay ₹48,298
+                    </button>
+                </div>
+                
+                <!-- Wallets -->
+                <div class="payment-content" id="wallet-payment">
+                    <h3 style="font-size: 14px; margin-bottom: 15px; color: #444;">Select Wallet</h3>
+                    <div class="wallet-list">
+                        <div class="wallet-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Paytm_Logo.png/640px-Paytm_Logo.png" class="wallet-icon" alt="Paytm">
+                            <div class="wallet-name">Paytm</div>
+                        </div>
+                        <div class="wallet-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Mobikwik_new_logo.svg/2560px-Mobikwik_new_logo.svg.png" class="wallet-icon" alt="MobiKwik">
+                            <div class="wallet-name">MobiKwik</div>
+                        </div>
+                        <div class="wallet-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Amazon_Pay_logo.svg/2560px-Amazon_Pay_logo.svg.png" class="wallet-icon" alt="Amazon Pay">
+                            <div class="wallet-name">Amazon Pay</div>
+                        </div>
+                        <div class="wallet-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/PhonePe_Logo.svg/2560px-PhonePe_Logo.svg.png" class="wallet-icon" alt="PhonePe">
+                            <div class="wallet-name">PhonePe</div>
+                        </div>
+                        <div class="wallet-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Freecharge_Logo.svg/2560px-Freecharge_Logo.svg.png" class="wallet-icon" alt="Freecharge">
+                            <div class="wallet-name">Freecharge</div>
+                        </div>
+                        <div class="wallet-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Google_Pay_%28GPay%29_Logo_%282018-2020%29.svg/2560px-Google_Pay_%28GPay%29_Logo_%282018-2020%29.svg.png" class="wallet-icon" alt="Google Pay">
+                            <div class="wallet-name">Google Pay</div>
+                        </div>
+                    </div>
+                    
+                    <button class="pay-btn">
+                        <i class="fas fa-lock"></i> Pay ₹48,298
+                    </button>
+                </div>
+                
+                <div class="secure-info">
+                    <i class="fas fa-lock secure-icon"></i>
+                    <span>Your payment information is processed securely. We do not store your card details.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+        <div class="loading-text">Processing Payment...</div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span>Payment successful! Redirecting to order confirmation...</span>
+    </div>
+    
+    <nav class="mobile-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Cart</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="#" class="nav-item active">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
 
-      <label for="firstname">First Name:</label>
-      <input type="text" name="firstname" value="">
-
-      <label for="email">Email:</label>
-      <input type="email" name="email" value="">
-
-      <label for="phone">Phone:</label>
-      <input type="text" name="phone" value="">
-
-      <input type="submit" value="Pay Now with PayU">
-    </form>
-  </div>
+    <script>
+        // Payment Tabs
+        const paymentTabs = document.querySelectorAll('.payment-tab');
+        const paymentContents = document.querySelectorAll('.payment-content');
+        
+        paymentTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                paymentTabs.forEach(t => t.classList.remove('active'));
+                paymentContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(`${tabId}-payment`).classList.add('active');
+            });
+        });
+        
+        // Card Icons
+        const cardIcons = document.querySelectorAll('.card-icon');
+        
+        cardIcons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                cardIcons.forEach(i => i.classList.remove('active'));
+                icon.classList.add('active');
+            });
+        });
+        
+        // UPI Methods
+        const upiMethods = document.querySelectorAll('.upi-method');
+        
+        upiMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                upiMethods.forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+            });
+        });
+        
+        // Bank Items
+        const bankItems = document.querySelectorAll('.bank-item');
+        
+        bankItems.forEach(item => {
+            item.addEventListener('click', () => {
+                bankItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+        
+        // Wallet Items
+        const walletItems = document.querySelectorAll('.wallet-item');
+        
+        walletItems.forEach(item => {
+            item.addEventListener('click', () => {
+                walletItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+        
+        // Card Payment Form Submission
+        const cardPaymentForm = document.getElementById('cardPaymentForm');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const notification = document.getElementById('notification');
+        
+        if (cardPaymentForm) {
+            cardPaymentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading overlay
+                loadingOverlay.classList.add('active');
+                
+                // Simulate payment processing
+                setTimeout(() => {
+                    loadingOverlay.classList.remove('active');
+                    notification.classList.add('show');
+                    
+                    // Redirect to success page after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'order-success.html';
+                    }, 2000);
+                }, 3000);
+            });
+        }
+        
+        // Other payment methods would have similar form submission handlers
+        document.querySelectorAll('.pay-btn').forEach(button => {
+            if (button.type !== 'submit') {
+                button.addEventListener('click', function() {
+                    loadingOverlay.classList.add('active');
+                    
+                    setTimeout(() => {
+                        loadingOverlay.classList.remove('active');
+                        notification.classList.add('show');
+                        
+                        setTimeout(() => {
+                            window.location.href = 'order-success.html';
+                        }, 2000);
+                    }, 3000);
+                });
+            }
+        });
+        
+        // Format card number as user types
+        const cardNumberInput = document.querySelector('input[placeholder="1234 5678 9012 3456"]');
+        if (cardNumberInput) {
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s/g, '');
+                if (value.length > 0) {
+                    value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+                }
+                e.target.value = value;
+            });
+        }
+        
+        // Format expiry date as user types
+        const expiryInput = document.querySelector('input[placeholder="MM/YY"]');
+        if (expiryInput) {
+            expiryInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+        }
+    </script>
 </body>
 </html>
