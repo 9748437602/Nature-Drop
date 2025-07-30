@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Checkout | Nature Drop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -587,7 +588,7 @@
         <div class="top-bar">
             <div class="logo-container">
                 <div class="round-logo">
-                    <img src="images/nature drop.png" alt="Nature Drop Logo">
+                    <img src="images/nature drop.png" alt="Nature Drop Logo" style="height: 40px;" />
                 </div>
                 <div class="logo-text">Nature Drop</div>
             </div>
@@ -667,7 +668,7 @@
                         
                         <div class="form-group">
                             <label class="form-label">Name on Card</label>
-                            <input type="text" class="form-control" placeholder="John Doe" required>
+                            <input type="text" class="form-control" placeholder="Card Holder Name" required>
                         </div>
                         
                         <div class="row">
@@ -692,7 +693,7 @@
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/RuPay.svg/1200px-RuPay.svg.png" class="card-icon" alt="RuPay" style="height: 25px; width: auto;">
                         </div>
                         
-                        <button type="submit" class="pay-btn">
+                        <button type="button" class="pay-btn" id="payuBtn">
                             <i class="fas fa-lock"></i> Pay ₹48,298
                         </button>
                     </form>
@@ -702,7 +703,7 @@
                 <div class="payment-content" id="upi-payment">
                     <div class="form-group">
                         <label class="form-label">Enter UPI ID</label>
-                        <input type="text" class="form-control" placeholder="yourname@upi">
+                        <input type="text" class="form-control" placeholder="Example@upi">
                     </div>
                     
                     <p style="text-align: center; margin: 15px 0; color: #777;">OR</p>
@@ -710,28 +711,40 @@
                     <h3 style="font-size: 14px; margin-bottom: 15px; color: #444;">Choose UPI App</h3>
                     <div class="upi-methods">
                         <div class="upi-method">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Paytm_Logo.png/640px-Paytm_Logo.png" class="upi-icon" alt="Paytm">
+                            <img src="images/Paytm Rounded Logo.png" class="upi-icon" alt="Paytm">
                             <div class="upi-name">Paytm</div>
                         </div>
                         <div class="upi-method">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/PhonePe_Logo.svg/2560px-PhonePe_Logo.svg.png" class="upi-icon" alt="PhonePe">
+                            <img src="images/PhonePe Rounded Logo.png" class="upi-icon" alt="PhonePe">
                             <div class="upi-name">PhonePe</div>
                         </div>
                         <div class="upi-method">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Google_Pay_%28GPay%29_Logo_%282018-2020%29.svg/2560px-Google_Pay_%28GPay%29_Logo_%282018-2020%29.svg.png" class="upi-icon" alt="Google Pay">
+                            <img src="images/Gpay Rounded Logo.png" class="upi-icon" alt="Google Pay">
                             <div class="upi-name">Google Pay</div>
                         </div>
                         <div class="upi-method">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/BHIM_Logo.svg/1200px-BHIM_Logo.svg.png" class="upi-icon" alt="BHIM">
+                            <img src="images/BHIM Rounded Logo.png" class="upi-icon" alt="BHIM">
                             <div class="upi-name">BHIM</div>
                         </div>
                         <div class="upi-method">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Amazon_Pay_logo.svg/2560px-Amazon_Pay_logo.svg.png" class="upi-icon" alt="Amazon Pay">
+                            <img src="images/Amazon Pay Rounded Logo.png" class="upi-icon" alt="Amazon Pay">
                             <div class="upi-name">Amazon Pay</div>
                         </div>
                         <div class="upi-method">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Mobikwik_new_logo.svg/2560px-Mobikwik_new_logo.svg.png" class="upi-icon" alt="MobiKwik">
+                            <img src="images/Mobikwik Rounded Logo.png" class="upi-icon" alt="MobiKwik">
                             <div class="upi-name">MobiKwik</div>
+                        </div>
+                        <div class="upi-method">
+                            <img src="images/RearPe Rounded Logo.png" class="upi-icon" alt="RearPe">
+                            <div class="upi-name">RearPe</div>
+                        </div>
+                        <div class="upi-method">
+                            <img src="images/Whatsapp Rounded Logo.png" class="upi-icon" alt="whatsapp">
+                            <div class="upi-name">Whatsapp</div>
+                        </div>
+                        <div class="upi-method">
+                            <img src="images/Navi Rounded Logo.png" class="upi-icon" alt="navi">
+                            <div class="upi-name">Navi App</div>
                         </div>
                     </div>
                     
@@ -745,27 +758,27 @@
                     <h3 style="font-size: 14px; margin-bottom: 15px; color: #444;">Select Your Bank</h3>
                     <div class="bank-list">
                         <div class="bank-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/SBI-logo.svg/2560px-SBI-logo.svg.png" class="bank-icon" alt="SBI">
+                            <img src="images/SBI Rounded Logo.png" class="bank-icon" alt="SBI">
                             <div class="bank-name">State Bank of India</div>
                         </div>
                         <div class="bank-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/HDFC_Bank_Logo.svg/2560px-HDFC_Bank_Logo.svg.png" class="bank-icon" alt="HDFC">
+                            <img src="images/HDFC Rounded Logo.png" class="bank-icon" alt="HDFC">
                             <div class="bank-name">HDFC Bank</div>
                         </div>
                         <div class="bank-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/2560px-ICICI_Bank_Logo.svg.png" class="bank-icon" alt="ICICI">
+                            <img src="images/Icici Rounded Logo.png" class="bank-icon" alt="ICICI">
                             <div class="bank-name">ICICI Bank</div>
                         </div>
                         <div class="bank-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Axis_Bank_logo.svg/2560px-Axis_Bank_logo.svg.png" class="bank-icon" alt="Axis">
+                            <img src="images/Axis Rounded Logo.png" class="bank-icon" alt="Axis">
                             <div class="bank-name">Axis Bank</div>
                         </div>
                         <div class="bank-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Kotak_Mahindra_Bank_Logo.svg/2560px-Kotak_Mahindra_Bank_Logo.svg.png" class="bank-icon" alt="Kotak">
+                            <img src="images/Kotak Rounded Logo.png" class="bank-icon" alt="Kotak">
                             <div class="bank-name">Kotak Mahindra Bank</div>
                         </div>
                         <div class="bank-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/IDFC_First_Bank_Logo.svg/1200px-IDFC_First_Bank_Logo.svg.png" class="bank-icon" alt="IDFC">
+                            <img src="images/IDFC Rounded Logo.png" class="bank-icon" alt="IDFC">
                             <div class="bank-name">IDFC First Bank</div>
                         </div>
                     </div>
@@ -780,27 +793,27 @@
                     <h3 style="font-size: 14px; margin-bottom: 15px; color: #444;">Select Wallet</h3>
                     <div class="wallet-list">
                         <div class="wallet-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Paytm_Logo.png/640px-Paytm_Logo.png" class="wallet-icon" alt="Paytm">
+                            <img src="images/Paytm Rounded Logo.png" class="wallet-icon" alt="Paytm">
                             <div class="wallet-name">Paytm</div>
                         </div>
                         <div class="wallet-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Mobikwik_new_logo.svg/2560px-Mobikwik_new_logo.svg.png" class="wallet-icon" alt="MobiKwik">
+                            <img src="images/Mobikwik Rounded Logo.png" class="wallet-icon" alt="MobiKwik">
                             <div class="wallet-name">MobiKwik</div>
                         </div>
                         <div class="wallet-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Amazon_Pay_logo.svg/2560px-Amazon_Pay_logo.svg.png" class="wallet-icon" alt="Amazon Pay">
+                            <img src="images/Amazon Pay Rounded Logo.png" class="wallet-icon" alt="Amazon Pay">
                             <div class="wallet-name">Amazon Pay</div>
                         </div>
                         <div class="wallet-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/PhonePe_Logo.svg/2560px-PhonePe_Logo.svg.png" class="wallet-icon" alt="PhonePe">
+                            <img src="images/PhonePe Rounded Logo.png" class="wallet-icon" alt="PhonePe">
                             <div class="wallet-name">PhonePe</div>
                         </div>
                         <div class="wallet-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Freecharge_Logo.svg/2560px-Freecharge_Logo.svg.png" class="wallet-icon" alt="Freecharge">
-                            <div class="wallet-name">Freecharge</div>
+                            <img src="images/Free Charge Rounded Logo.png" class="wallet-icon" alt="Freecharge">
+                            <div class="wallet-name">Free charge</div>
                         </div>
                         <div class="wallet-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Google_Pay_%28GPay%29_Logo_%282018-2020%29.svg/2560px-Google_Pay_%28GPay%29_Logo_%282018-2020%29.svg.png" class="wallet-icon" alt="Google Pay">
+                            <img src="images/Gpay Rounded Logo.png" class="wallet-icon" alt="Google Pay">
                             <div class="wallet-name">Google Pay</div>
                         </div>
                     </div>
@@ -913,34 +926,87 @@
             });
         });
         
-        // Card Payment Form Submission
-        const cardPaymentForm = document.getElementById('cardPaymentForm');
         const loadingOverlay = document.getElementById('loadingOverlay');
         const notification = document.getElementById('notification');
+        const payuBtn = document.getElementById('payuBtn');
         
-        if (cardPaymentForm) {
-            cardPaymentForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Show loading overlay
-                loadingOverlay.classList.add('active');
-                
-                // Simulate payment processing
-                setTimeout(() => {
-                    loadingOverlay.classList.remove('active');
-                    notification.classList.add('show');
-                    
-                    // Redirect to success page after 2 seconds
-                    setTimeout(() => {
-                        window.location.href = 'order-success.html';
-                    }, 2000);
-                }, 3000);
+        // PayU Payment Integration
+        function processPayUPayment() {
+            // Show loading overlay
+            loadingOverlay.classList.add('active');
+            
+            // Simulate form validation and payment processing
+            setTimeout(() => {
+                redirectToPayU();
+            }, 2000);
+        }
+        
+        function redirectToPayU() {
+            const payuURL = "https://secure.payu.in/_payment";
+            const form = document.createElement("form");
+            form.method = "POST";
+            form.action = payuURL;
+            form.style.display = "none";
+            
+            // Get total amount from order summary
+            const totalAmount = parseFloat(document.querySelector('.grand-total span:last-child').textContent.replace('₹', '').replace(',', '')).toFixed(2);
+            
+            // Create form data
+            const data = {
+                key: "BRLraz",
+                txnid: "Txn" + Math.floor(Math.random() * 1000000),
+                amount: totalAmount,
+                productinfo: "Nature Drop Order",
+                firstname: "Arif",
+                email: "arif@example.com",
+                phone: "9748437602",
+                surl: "order-success.html",
+                furl: "order-failure.html",
+                service_provider: "payu_paisa",
+            };
+            
+            // Generate hash
+            const salt = "mB7E7jiGmt9sf7E3FfyjlUzWGDimMfqH";
+            const hashString = `${data.key}|${data.txnid}|${data.amount}|${data.productinfo}|${data.firstname}|${data.email}|||||||||||${salt}`;
+            const hash = CryptoJS.SHA512(hashString).toString();
+            data.hash = hash;
+            
+            // Create hidden inputs
+            for (const key in data) {
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = key;
+                input.value = data[key];
+                form.appendChild(input);
+            }
+            
+            // Submit form
+            document.body.appendChild(form);
+            form.submit();
+            
+            // Hide loading after redirect
+            setTimeout(() => {
+                loadingOverlay.classList.remove('active');
+            }, 1000);
+        }
+        
+        // Attach PayU payment handler
+        if (payuBtn) {
+            payuBtn.addEventListener('click', function() {
+                // Validate card form
+                const cardForm = document.getElementById('cardPaymentForm');
+                if (cardForm.checkValidity()) {
+                    processPayUPayment();
+                } else {
+                    // Trigger HTML5 validation
+                    cardForm.reportValidity();
+                }
             });
         }
         
-        // Other payment methods would have similar form submission handlers
+        // Other payment methods simulation
         document.querySelectorAll('.pay-btn').forEach(button => {
-            if (button.type !== 'submit') {
+            if (button.id !== 'payuBtn') {
                 button.addEventListener('click', function() {
                     loadingOverlay.classList.add('active');
                     
